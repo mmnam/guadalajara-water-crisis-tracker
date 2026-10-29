@@ -1,0 +1,276 @@
+{
+  "actors": [
+    {
+      "id": 1,
+      "name": "Organismo de Agua DEMO",
+      "actor_type": "government_agency",
+      "institution": "Institución ficticia",
+      "role": "Operación de un sistema ficticio",
+      "notes": "No representa a SIAPA ni a una institución real.",
+      "verified": 0
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "event_date": "2022-03-10",
+      "title": "Aviso ciudadano simulado",
+      "description": "DEMO: habitantes ficticios reportan cambios en el agua.",
+      "category": "public_complaint",
+      "location": "Ubicación ficticia · GDL",
+      "significance": "Ejemplo de memoria cronológica; no es un hecho histórico.",
+      "verified": 0
+    },
+    {
+      "id": 2,
+      "event_date": "2023-06-15",
+      "title": "Investigación simulada",
+      "description": "DEMO: se anuncia una revisión de un sistema ficticio.",
+      "category": "investigation",
+      "location": "Ubicación ficticia · GDL",
+      "significance": "Ejemplo de memoria cronológica; no es un hecho histórico.",
+      "verified": 0
+    },
+    {
+      "id": 3,
+      "event_date": "2024-09-20",
+      "title": "Recomendación simulada",
+      "description": "DEMO: un informe ficticio recomienda monitoreo periódico.",
+      "category": "recommendation",
+      "location": "Ubicación ficticia · GDL",
+      "significance": "Ejemplo de memoria cronológica; no es un hecho histórico.",
+      "verified": 0
+    },
+    {
+      "id": 4,
+      "event_date": "2025-02-01",
+      "title": "Acción de infraestructura simulada",
+      "description": "DEMO: se registra una obra ficticia como terminada.",
+      "category": "infrastructure",
+      "location": "Ubicación ficticia · GDL",
+      "significance": "Ejemplo de memoria cronológica; no es un hecho histórico.",
+      "verified": 0
+    },
+    {
+      "id": 5,
+      "event_date": "2026-01-12",
+      "title": "Seguimiento simulado",
+      "description": "DEMO: el expediente ficticio no contiene evidencia de seguimiento.",
+      "category": "water_quality",
+      "location": "Ubicación ficticia · GDL",
+      "significance": "Ejemplo de memoria cronológica; no es un hecho histórico.",
+      "verified": 0
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "title": "Ficha sintética DEMO 1",
+      "publisher": "Datos de demostración",
+      "url": null,
+      "publication_date": "2022-03-10",
+      "source_type": "other",
+      "reliability_notes": "Documento ficticio. Sin URL ni valor probatorio.",
+      "verified": 0
+    },
+    {
+      "id": 2,
+      "title": "Ficha sintética DEMO 2",
+      "publisher": "Datos de demostración",
+      "url": null,
+      "publication_date": "2023-06-15",
+      "source_type": "other",
+      "reliability_notes": "Documento ficticio. Sin URL ni valor probatorio.",
+      "verified": 0
+    },
+    {
+      "id": 3,
+      "title": "Ficha sintética DEMO 3",
+      "publisher": "Datos de demostración",
+      "url": null,
+      "publication_date": "2024-09-20",
+      "source_type": "other",
+      "reliability_notes": "Documento ficticio. Sin URL ni valor probatorio.",
+      "verified": 0
+    },
+    {
+      "id": 4,
+      "title": "Ficha sintética DEMO 4",
+      "publisher": "Datos de demostración",
+      "url": null,
+      "publication_date": "2025-02-01",
+      "source_type": "other",
+      "reliability_notes": "Documento ficticio. Sin URL ni valor probatorio.",
+      "verified": 0
+    },
+    {
+      "id": 5,
+      "title": "Ficha sintética DEMO 5",
+      "publisher": "Datos de demostración",
+      "url": null,
+      "publication_date": "2026-01-12",
+      "source_type": "other",
+      "reliability_notes": "Documento ficticio. Sin URL ni valor probatorio.",
+      "verified": 0
+    }
+  ],
+  "event_sources": [
+    {
+      "event_id": 1,
+      "source_id": 1
+    },
+    {
+      "event_id": 2,
+      "source_id": 2
+    },
+    {
+      "event_id": 3,
+      "source_id": 3
+    },
+    {
+      "event_id": 4,
+      "source_id": 4
+    },
+    {
+      "event_id": 5,
+      "source_id": 5
+    }
+  ],
+  "event_actors": [
+    {
+      "event_id": 1,
+      "actor_id": 1
+    },
+    {
+      "event_id": 2,
+      "actor_id": 1
+    },
+    {
+      "event_id": 3,
+      "actor_id": 1
+    },
+    {
+      "event_id": 4,
+      "actor_id": 1
+    },
+    {
+      "event_id": 5,
+      "actor_id": 1
+    }
+  ],
+  "claims": [
+    {
+      "id": 1,
+      "actor_id": 1,
+      "event_id": 1,
+      "claim_date": "2022-03-10",
+      "claim_text": "DEMO: recibimos un reporte que será revisado.",
+      "source_id": 1,
+      "verified": 0
+    },
+    {
+      "id": 2,
+      "actor_id": 1,
+      "event_id": 2,
+      "claim_date": "2023-06-15",
+      "claim_text": "DEMO: realizaremos una revisión técnica.",
+      "source_id": 2,
+      "verified": 0
+    },
+    {
+      "id": 3,
+      "actor_id": 1,
+      "event_id": 3,
+      "claim_date": "2024-09-20",
+      "claim_text": "DEMO: publicaremos resultados de monitoreo.",
+      "source_id": 3,
+      "verified": 0
+    },
+    {
+      "id": 4,
+      "actor_id": 1,
+      "event_id": 4,
+      "claim_date": "2025-02-01",
+      "claim_text": "DEMO: la obra simulada fue concluida.",
+      "source_id": 4,
+      "verified": 0
+    },
+    {
+      "id": 5,
+      "actor_id": 1,
+      "event_id": 5,
+      "claim_date": "2026-01-12",
+      "claim_text": "DEMO: revisaremos el seguimiento del expediente.",
+      "source_id": 5,
+      "verified": 0
+    }
+  ],
+  "responsibilities": [
+    {
+      "id": 1,
+      "actor_id": 1,
+      "responsibility": "DEMO: supervisar un sistema ficticio de tratamiento",
+      "start_date": "2022-01-01",
+      "legal_or_institutional_basis": "Reglamento ficticio, sin valor legal",
+      "source_id": 1,
+      "verified": 0
+    }
+  ],
+  "commitments": [
+    {
+      "id": 1,
+      "actor_id": 1,
+      "event_id": 1,
+      "commitment_date": "2022-03-10",
+      "commitment": "DEMO: recibimos un reporte que será revisado.",
+      "deadline": null,
+      "status": "announced",
+      "source_id": 1,
+      "verified": 0
+    },
+    {
+      "id": 2,
+      "actor_id": 1,
+      "event_id": 2,
+      "commitment_date": "2023-06-15",
+      "commitment": "DEMO: realizaremos una revisión técnica.",
+      "deadline": null,
+      "status": "in_progress",
+      "source_id": 2,
+      "verified": 0
+    },
+    {
+      "id": 3,
+      "actor_id": 1,
+      "event_id": 3,
+      "commitment_date": "2024-09-20",
+      "commitment": "DEMO: publicaremos resultados de monitoreo.",
+      "deadline": null,
+      "status": "delayed",
+      "source_id": 3,
+      "verified": 0
+    },
+    {
+      "id": 4,
+      "actor_id": 1,
+      "event_id": 4,
+      "commitment_date": "2025-02-01",
+      "commitment": "DEMO: la obra simulada fue concluida.",
+      "deadline": null,
+      "status": "completed",
+      "source_id": 4,
+      "verified": 0
+    },
+    {
+      "id": 5,
+      "actor_id": 1,
+      "event_id": 5,
+      "commitment_date": "2026-01-12",
+      "commitment": "DEMO: revisaremos el seguimiento del expediente.",
+      "deadline": null,
+      "status": "unknown",
+      "source_id": 5,
+      "verified": 0
+    }
+  ]
+}
