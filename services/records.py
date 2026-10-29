@@ -10,6 +10,9 @@ def actors():
 def sources(event_id):
     return query('SELECT s.* FROM sources s JOIN event_sources es ON es.source_id=s.id WHERE es.event_id=?', (event_id,))
 
+def attributed_material():
+    return query("SELECT * FROM attributed_material WHERE evidence_tier='attributed_reviewed' AND review_status='reviewed_attributed' ORDER BY publication_date,id")
+
 def timeline(year=None, category=None, actor=None, demo=False):
     sql = 'SELECT e.* FROM events e WHERE 1=1'
     params = []

@@ -42,15 +42,20 @@ def render_result(result):
     if not result['sources']:
         st.caption('No hay fuentes citadas en esta respuesta.')
     for s in result['sources']:
-        st.caption(f"[S{s['id']}] · {s['publisher']} · {s['publication_date']}")
+        status = 'Reporte / análisis atribuido' if s.get('evidence_tier') == 'attributed_reviewed' else 'Fuente verificada'
+        st.caption(f"[S{s['id']}] · {status} · {s['publisher']} · {s['publication_date']}")
         source_link(s)
     with st.expander('Ver consultas SQL · SELECT / solo lectura'):
         for trace in result['traces']:
             st.code(trace['sql'], language='sql')
             st.write({'parámetros':trace['parameters'],'filas':trace['rows']})
     with st.expander('Inspeccionar evidencia recuperada'):
-        if result['evidence'].get('events'):
-            st.dataframe(pd.DataFrame(result['evidence']['events']), hide_index=True, use_container_width=True)
+        if result['evidence'].get('verified_evidence', {}).get('events'):
+            st.caption('Evidencia verificada')
+            st.dataframe(pd.DataFrame(result['evidence']['verified_evidence']['events']), hide_index=True, use_container_width=True)
+        if result['evidence'].get('attributed_evidence'):
+            st.caption('Reporte / análisis atribuido')
+            st.dataframe(pd.DataFrame(result['evidence']['attributed_evidence']), hide_index=True, use_container_width=True)
         st.json(result['evidence'])
 
 
@@ -86,7 +91,7 @@ if page == 'Línea del tiempo':
                     st.caption(s['reliability_notes'])
 elif page == 'Pregúntale al archivo':
     st.subheader('Preguntas al archivo, respuestas con evidencia')
-    st.caption('El agente consulta únicamente registros verificados. La búsqueda es acotada; no demuestra el primer aviso de toda la historia ni la ausencia de antecedentes.')
+    st.caption('El agente separa evidencia verificada de reportes y análisis atribuidos revisados. La segunda capa no prueba por sí sola su afirmación subyacente. La búsqueda es acotada; no demuestra el primer aviso de toda la historia ni la ausencia de antecedentes.')
     suggestions = ['¿Quién sabía qué y cuándo?','¿Qué advertencias existían antes de 2026?','¿Qué prometió SIAPA?','Muéstrame eventos relacionados con Las Pintas.','¿Quién era responsable del tratamiento del agua?']
     selected = None
     for i,q in enumerate(suggestions):
@@ -148,3 +153,11 @@ else:
             st.caption(f"S{source['id']} · {source['source_type']} · " + ('Verificada' if source['verified'] else 'DEMO / no verificada'))
             source_link(source)
             st.write(source['reliability_notes'])
+    if not demo:
+        st.markdown('### Reportes y análisis atribuidos revisados')
+        for material in records.attributed_material():
+            with st.container(border=True):
+                st.caption(f"[S{material['id']}] · Reporte / análisis atribuido · {material['source_type']}")
+                source_link(material)
+                st.write(material['paraphrase'])
+                st.caption(material['review_notes'])

@@ -10,6 +10,14 @@ CREATE TABLE IF NOT EXISTS sources (
  id INTEGER PRIMARY KEY, title TEXT NOT NULL, publisher TEXT, url TEXT,
  publication_date TEXT, source_type TEXT, reliability_notes TEXT,
  verified INTEGER NOT NULL DEFAULT 0 CHECK(verified IN (0,1)));
+CREATE TABLE IF NOT EXISTS attributed_material (
+ id INTEGER PRIMARY KEY, publication_date TEXT NOT NULL, publication_time TEXT,
+ title TEXT NOT NULL, author TEXT NOT NULL, account TEXT, professional_role TEXT,
+ publisher TEXT, url TEXT NOT NULL, source_type TEXT NOT NULL,
+ paraphrase TEXT NOT NULL, exact_claim TEXT NOT NULL, evidence_type TEXT NOT NULL,
+ supporting_documents TEXT, underlying_documents_retrieved INTEGER NOT NULL DEFAULT 0 CHECK(underlying_documents_retrieved IN (0,1)),
+ corroboration_status TEXT NOT NULL, review_status TEXT NOT NULL CHECK(review_status='reviewed_attributed'),
+ evidence_tier TEXT NOT NULL CHECK(evidence_tier='attributed_reviewed'), review_notes TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS event_sources (
  event_id INTEGER REFERENCES events(id), source_id INTEGER REFERENCES sources(id),
  PRIMARY KEY(event_id,source_id));

@@ -15,6 +15,7 @@ from services import records
 
 ROOT = Path(__file__).resolve().parents[1]
 APPROVED = ROOT / 'data' / 'approved_records.json'
+ATTRIBUTED = ROOT / 'data' / 'attributed_reviewed_records.json'
 APPROVED_IDS = {1201, 1202, 1204, 1205, 1206, 1211, 1222, 1212, 1219, 1217, 1218, 1220}
 
 
@@ -28,6 +29,7 @@ class ApprovedImportTest(unittest.TestCase):
         self.env.start()
         seed()  # Deliberately keep the fictional fixtures isolated in the same DB.
         seed(APPROVED)
+        seed(ATTRIBUTED)
 
     def tearDown(self):
         self.env.stop()
@@ -89,7 +91,13 @@ class ApprovedImportTest(unittest.TestCase):
             ids = {row['id'] for row in evidence['events']}
             self.assertTrue(expected.issubset(ids), question)
             self.assertTrue(evidence['sources'], question)
-            self.assertTrue(all(source['verified'] == 1 and source['url'] for source in evidence['sources']), question)
+            self.assertTrue(all(
+                source['url'] and (
+                    source.get('evidence_tier') == 'attributed_reviewed'
+                    or source.get('verified') == 1
+                )
+                for source in evidence['sources']
+            ), question)
 
     def test_month_cutoff_includes_2026_records_before_october(self):
         evidence, _ = retrieve(fallback_plan('¿Qué sabía SIAPA antes de octubre de 2026?'))
@@ -120,6 +128,63 @@ class ApprovedImportTest(unittest.TestCase):
             result = ask('¿Qué ocurrió entre CONAGUA y SIAPA en septiembre de 2025?')
         self.assertEqual([source['id'] for source in result['sources']], [1102])
         self.assertTrue(result['answer'].endswith('[S1102]'))
+
+    def test_attributed_reviewed_material_is_retrieved_separately_and_labeled(self):
+        evidence, _ = retrieve({'terms': ['nixticuil'], 'before_year': None, 'before_date': None})
+        self.assertEqual(evidence['verified_evidence']['events'], [])
+        self.assertEqual([row['id'] for row in evidence['attributed_evidence']], [2102])
+        row = evidence['attributed_evidence'][0]
+        self.assertEqual(row['evidence_tier'], 'attributed_reviewed')
+        self.assertEqual(row['review_status'], 'reviewed_attributed')
+        self.assertEqual(evidence['sources'][0]['evidence_tier'], 'attributed_reviewed')
+
+    def test_arbitrary_unverified_record_is_not_promoted_to_attributed_evidence(self):
+        with connect() as conn:
+            conn.execute("INSERT INTO sources (id,title,url,verified) VALUES (2998,'unreviewed','https://example.org/unreviewed',0)")
+            conn.execute("INSERT INTO events (id,event_date,title,description,category,verified) VALUES (2998,'2026-01-01','unreviewed lead','arbitrary research lead','other',0)")
+            conn.execute('INSERT INTO event_sources (event_id,source_id) VALUES (2998,2998)')
+        evidence, _ = retrieve({'terms': ['arbitrary'], 'before_year': None, 'before_date': None})
+        self.assertEqual(evidence['verified_evidence']['events'], [])
+        self.assertEqual(evidence['attributed_evidence'], [])
+
+    def test_mixed_tiers_remain_separate_and_cited(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['siapa'], 'before_year': None, 'before_date': None}),
+            response({'answer': 'Lo documentado: respuesta institucional [S1101]. Reportado o señalado: trabajadores entrevistados afirmaron problemas [S2103].', 'source_ids': [1101, 2103]}),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué se documentó y qué reportaron trabajadores sobre SIAPA?')
+        self.assertEqual({source['id'] for source in result['sources']}, {1101, 2103})
+        self.assertEqual(result['evidence']['verified_evidence']['events'][0]['verified'], 1)
+        self.assertTrue(result['evidence']['attributed_evidence'])
+        self.assertIn('Reportado o señalado', result['answer'])
+
+    def test_journalist_material_cannot_be_rendered_as_a_factual_finding(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['nixticuil'], 'before_year': None, 'before_date': None}),
+            response({'answer': 'Está comprobado que el origen de la descarga fue identificado [S2102].', 'source_ids': [2102]}),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertIn('no son suficientes', result['answer'])
+        self.assertEqual(result['sources'], [])
+
+    def test_unsupported_political_conclusion_fails_safely(self):
+        with patch.dict(os.environ, {'OPENAI_API_KEY': ''}):
+            result = ask('¿Qué partido político gobernaba cuando estas quejas estaban siendo externadas?')
+        self.assertIn('no son suficientes', result['answer'])
+        self.assertIn('partido o la administración', result['notice'])
+
+    def test_original_x_url_is_preserved(self):
+        evidence, _ = retrieve({'terms': ['nuevo pico'], 'before_year': None, 'before_date': None})
+        row = next(item for item in evidence['attributed_evidence'] if item['id'] == 2105)
+        self.assertEqual(row['url'], 'https://x.com/JSTapetillo/status/2106757575630872957')
 
 
 if __name__ == '__main__':

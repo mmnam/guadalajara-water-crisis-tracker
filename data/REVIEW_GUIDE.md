@@ -14,6 +14,19 @@
 
 Los candidatos 1201, 1202, 1204, 1205, 1211, 1212, 1217, 1218 y 1220 tienen respaldo de las recomendaciones primarias de CEDHJ. Revisar después 1214 (advertencias atribuidas al personal), 1221 (muestras ciudadanas), 1223 (cierre y explicación oficial) y 1227 (plan). Ninguno está aprobado.
 
+## Subconjunto habilitado como evidencia atribuida revisada
+
+El archivo `attributed_reviewed_records.json` selecciona solamente material que esta guía documenta como leído directamente o revisado de forma sustantiva. No aprueba los hechos subyacentes ni promueve automáticamente otros candidatos `verified=0`.
+
+- A2101: hilo original de @JSTapetillo del 17 de septiembre de 2025 sobre Arroyo Seco; diagnóstico y alegaciones, sin expediente ni peritaje.
+- A2102: post original de @jcrtoral del 13 de abril de 2026; observación visual periodística en El Nixticuil y testimonios atribuidos.
+- A2103: reportaje de Mario Marlo/ZonaDocs del 13 de marzo de 2026; testimonios atribuidos de personal de SIAPA.
+- A2104: reportaje de Violeta Meléndez/UDG Noticias del 13 de marzo de 2026; resultados reportados de un PDF oficial no recuperado.
+- A2105: post original de @JSTapetillo del 4 de octubre de 2026; análisis de un supuesto pico y una queja citada, sin análisis de laboratorio.
+- A2106: post original de @martinaquinoa del 18 de octubre de 2026; observación periodística y alegaciones disputadas sobre una protesta.
+
+Cada fila usa `evidence_tier=attributed_reviewed` y `review_status=reviewed_attributed`. El agente solo puede usarla para decir quién reportó, observó, alegó o analizó algo; no para establecer que la proposición subyacente sea verdadera. Los rastros inaccesibles, espejos, extractos y demás candidatos no seleccionados siguen siendo Tier 3 y quedan fuera de respuestas normales.
+
 ## Corpus propuesto en orden cronológico
 
 ### E1201 · 2020-08-22 · Queja por agua recibida en CEDHJ
