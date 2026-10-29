@@ -10,17 +10,58 @@ from agent.presentation import source_label
 st.set_page_config(page_title='Memoria Hídrica GDL', page_icon='💧', layout='wide')
 initialize()
 st.markdown('''<style>
-.block-container {max-width:1180px;padding-top:2rem} h1 {letter-spacing:-.05em}
-[data-testid="stMetric"] {background:#eaf1ef;padding:18px;border-radius:12px}
-[data-testid="stSidebar"] {border-right:1px solid #d3e2df}
+.stApp {background:#f6f3ee;color:#263840}
+.block-container {max-width:1180px;padding:1.25rem 1.25rem 3.5rem}
+h1,h2,h3 {color:#103d4c;letter-spacing:-.035em}
+h2 {margin-top:1.8rem!important}
+p,li,[data-testid="stCaptionContainer"] {color:#44535b}
+[data-testid="stSidebar"] {background:#103d4c;border-right:1px solid #1e6f78}
+[data-testid="stSidebar"] * {color:#f6f3ee}
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {color:#c8dadd}
+[data-testid="stSidebar"] [data-testid="stRadio"] label {border-radius:8px;padding:.28rem .4rem}
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {background:rgba(255,255,255,.1)}
+[data-testid="stSidebar"] [data-testid="stRadio"] [data-checked="true"] + div {font-weight:700}
+.archive-hero {position:relative;overflow:hidden;margin:.3rem 0 2rem;padding:2.2rem 2.35rem 2rem;border-radius:18px;background:linear-gradient(125deg,#103d4c 0%,#185968 58%,#1e6f78 100%);box-shadow:0 10px 28px rgba(16,61,76,.16);color:#f6f3ee}
+.archive-hero:after {content:"";position:absolute;inset:-30% -10% auto 48%;height:190%;opacity:.32;background:repeating-linear-gradient(90deg,transparent 0 28px,rgba(255,255,255,.1) 29px 30px),linear-gradient(135deg,transparent 42%,rgba(75,163,195,.7) 43% 45%,transparent 46%);transform:rotate(9deg);pointer-events:none}
+.archive-kicker,.sidebar-kicker {position:relative;z-index:1;color:#b7dfe7!important;font-size:.74rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
+.archive-hero h1 {position:relative;z-index:1;margin:.25rem 0 .45rem!important;color:#f6f3ee!important;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.25rem,5vw,4rem);letter-spacing:-.055em}
+.archive-hero p {position:relative;z-index:1;max-width:720px;margin:.25rem 0;color:#e3eff0!important;font-size:1.05rem}
+.archive-hero .archive-deck {font-size:1.22rem;line-height:1.45}
+.sidebar-brand {padding:.7rem .25rem 1.1rem;border-bottom:1px solid rgba(227,232,234,.28);margin-bottom:1.2rem}
+.sidebar-brand h2 {color:#f6f3ee!important;margin:.15rem 0!important;font-family:Georgia,"Times New Roman",serif}
+.sidebar-note {margin-top:1.4rem;padding:.8rem .85rem;border-left:3px solid #d9a441;background:rgba(255,255,255,.08);border-radius:0 8px 8px 0;font-size:.82rem;line-height:1.42}
+[data-testid="stMetric"] {background:#e3e8ea;padding:17px;border:1px solid #ccd8da;border-radius:12px}
+[data-testid="stMetric"] [data-testid="stMetricValue"] {color:#103d4c}
+[data-testid="stVerticalBlockBorderWrapper"] {border-color:#d3dedd!important;background:rgba(255,255,255,.5);border-radius:12px!important;box-shadow:0 2px 10px rgba(16,61,76,.045)}
+[data-testid="stExpander"] {background:rgba(255,255,255,.54);border:1px solid #d3dedd;border-radius:10px}
+.section-kicker {color:#1e6f78!important;font-size:.77rem;font-weight:760;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem}
+.section-intro {max-width:780px;font-size:1.02rem;line-height:1.5;margin-bottom:1.1rem}
+.evidence-badge {display:inline-block;border-radius:999px;padding:.22rem .58rem;font-size:.75rem;font-weight:750;letter-spacing:.015em}
+.badge-verified {color:#0e4c55;background:#d5e9e5;border:1px solid #8bbeb7}
+.badge-attributed {color:#754115;background:#f3e4c7;border:1px solid #d9a441}
+.badge-unresolved {color:#66423b;background:#f0ddd4;border:1px solid #b86a40}
+.badge-neutral {color:#314951;background:#e3e8ea;border:1px solid #b9c8cb}
+.finding-label {margin-bottom:.55rem}
+.finding-meta {color:#52666c!important;font-weight:650;margin:.1rem 0 .35rem}
+.uncertainty-box {margin:.7rem 0 0;padding:.65rem .8rem;border-left:3px solid #b86a40;background:#fbf0eb;border-radius:0 7px 7px 0;color:#66423b;font-size:.92rem}
+.answer-lede {padding:.85rem 1rem;border-left:4px solid #4ba3c3;background:#e8f2f3;border-radius:0 9px 9px 0;color:#284b56;margin-bottom:1.1rem}
+.timeline-marker {border-left:2px solid #4ba3c3;margin:1.05rem 0 0 .55rem;padding:0 0 .45rem 1.2rem;position:relative}
+.timeline-marker:before {content:"";position:absolute;left:-.48rem;top:.25rem;width:.78rem;height:.78rem;background:#f6f3ee;border:3px solid #1e6f78;border-radius:50%}
+.timeline-date {color:#1e6f78!important;font-size:.82rem;font-weight:800;letter-spacing:.055em;text-transform:uppercase}
+.source-card-title {margin:.45rem 0 .12rem;color:#103d4c!important;font-weight:760}
+.method-card {min-height:144px;padding:.95rem 1rem;border-top:4px solid #1e6f78;background:rgba(255,255,255,.58);border-radius:9px}
+.method-card h3 {margin:.15rem 0 .35rem!important;font-size:1.03rem}
+.method-card p {font-size:.9rem;line-height:1.45}
+.commitment-note {padding:.7rem .9rem;border-left:3px solid #d9a441;background:#faf4e7;border-radius:0 8px 8px 0}
+@media (max-width: 700px) {.archive-hero{padding:1.65rem 1.35rem}.archive-hero h1{font-size:2.35rem}.block-container{padding-left:1rem;padding-right:1rem}}
 </style>''', unsafe_allow_html=True)
-st.sidebar.markdown('## 💧 Memoria Hídrica\n**GUADALAJARA · ARCHIVO PÚBLICO**')
+st.sidebar.markdown('''<div class="sidebar-brand"><div class="sidebar-kicker">Archivo público</div><h2>Memoria Hídrica</h2><div class="sidebar-kicker">Guadalajara · crisis del agua</div></div>''', unsafe_allow_html=True)
+st.sidebar.markdown('#### Navegación del archivo')
 page = st.sidebar.radio('Explorar el archivo', ['Línea del tiempo','Pregúntale al archivo','Comparar declaraciones','Compromisos','Fuentes y método'])
+st.sidebar.markdown('#### Controles de lectura')
 demo = st.sidebar.toggle('Mostrar datos de demostración', value=False)
-st.sidebar.caption('La verificación es una revisión editorial de la fuente. No establece culpabilidad ni convierte una declaración en un hecho.')
-st.title('Memoria Hídrica GDL')
-st.markdown('**Una memoria verificable de cómo llegamos hasta aquí.**')
-st.caption('Explora eventos, decisiones, advertencias, declaraciones y compromisos relacionados con la crisis del agua en Guadalajara.')
+st.sidebar.markdown('<div class="sidebar-note">La verificación es una revisión editorial de la fuente. No establece culpabilidad ni convierte una declaración en un hecho.</div>', unsafe_allow_html=True)
+st.markdown('''<section class="archive-hero"><div class="archive-kicker">Zona Metropolitana de Guadalajara · Archivo público</div><h1>Memoria Hídrica GDL</h1><p class="archive-deck">Una memoria verificable de cómo llegamos hasta aquí.</p><p>Eventos, advertencias, decisiones, declaraciones y compromisos sobre la crisis del agua; cada registro conserva su fuente, atribución y límites de evidencia.</p></section>''', unsafe_allow_html=True)
 if demo:
     st.warning('MODO DEMO · Los registros marcados DEMO son ficticios. No describen hechos, instituciones ni responsabilidades reales. El agente siempre excluye estos registros.')
 
@@ -38,35 +79,54 @@ def citation_labels(source_ids):
     return ' · '.join(f'[S{source_id}]' for source_id in source_ids)
 
 
-def render_finding(finding, label):
+def evidence_badge(label, kind):
+    st.markdown(f'<span class="evidence-badge badge-{kind}">{html.escape(label)}</span>', unsafe_allow_html=True)
+
+
+def category_label(category):
+    labels = {
+        'public_complaint': 'Queja pública',
+        'institutional_warning': 'Advertencia institucional',
+        'formal_notification': 'Notificación formal',
+        'government_action': 'Acción gubernamental',
+        'official_statement': 'Declaración oficial',
+        'investigation': 'Investigación',
+        'recommendation': 'Recomendación',
+    }
+    return labels.get(category, category.replace('_', ' ').capitalize())
+
+
+def render_finding(finding, label, kind):
     with st.container(border=True):
-        st.caption(label)
-        st.markdown(f"**{finding['date']}**")
+        st.markdown('<div class="finding-label">', unsafe_allow_html=True)
+        evidence_badge(label, kind)
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown(f"<div class=\"finding-meta\">{html.escape(finding['date'])}</div>", unsafe_allow_html=True)
         st.markdown(f"#### {finding['title']}")
         if finding.get('author'):
             st.write(f"**Autor / fuente:** {finding['author']}")
         st.write(finding['text'])
         st.caption('Citas: ' + citation_labels(finding['source_ids']))
         if finding.get('limitation'):
-            st.markdown('**Límite**')
-            st.write(finding['limitation'])
+            st.markdown(f'<div class="uncertainty-box"><strong>Límite de evidencia.</strong> {html.escape(finding["limitation"])}</div>', unsafe_allow_html=True)
 
 
 def render_result(result):
     presentation = result.get('presentation')
     if presentation:
+        st.markdown('<div class="answer-lede"><strong>Lectura guiada del archivo.</strong> La respuesta conserva separadas la documentación institucional y el material atribuido revisado; las citas permiten volver a cada fuente.</div>', unsafe_allow_html=True)
         if presentation['verified_findings']:
             st.markdown('## Lo documentado oficialmente')
             for finding in presentation['verified_findings']:
-                render_finding(finding, 'Fuente verificada')
+                render_finding(finding, 'Fuente verificada', 'verified')
         if presentation['attributed_findings']:
             st.markdown('## Lo reportado o analizado')
             for finding in presentation['attributed_findings']:
-                render_finding(finding, 'Reporte / análisis atribuido')
+                render_finding(finding, 'Reporte / análisis atribuido', 'attributed')
         if presentation['limitations']:
             st.markdown('## Lo que todavía no puede establecerse')
             for limitation in presentation['limitations']:
-                st.markdown('- ' + limitation)
+                st.markdown(f'<div class="uncertainty-box">{html.escape(limitation)}</div>', unsafe_allow_html=True)
         st.markdown('## Conclusión')
         st.write(presentation['summary'])
     elif not result['sources'] and 'no son suficientes' in result['answer'].lower():
@@ -82,6 +142,7 @@ def render_result(result):
         st.caption('No hay fuentes citadas en esta respuesta.')
     for s in result['sources']:
         with st.container(border=True):
+            evidence_badge(source_label(s), 'verified' if s.get('evidence_tier') != 'attributed_reviewed' else 'attributed')
             st.markdown(f"**[S{s['id']}] · {source_label(s)}**")
             st.caption(f"{s['publisher']} · {s['publication_date']} · {s['source_type']}")
             source_link(s)
@@ -102,12 +163,16 @@ def render_result(result):
 all_actors = records.actors()
 actor_names = {a['id']:a['name'] for a in all_actors}
 if page == 'Línea del tiempo':
-    st.subheader('El presente tiene una historia')
+    st.markdown('<div class="section-kicker">Rastro histórico</div>', unsafe_allow_html=True)
+    st.header('El presente tiene una historia')
+    st.markdown('<p class="section-intro">Una cronología para situar qué se documentó, qué se dijo y qué quedó pendiente antes y durante la crisis. Cada ficha conserva la fuente y sus límites.</p>', unsafe_allow_html=True)
     base = records.timeline(demo=demo)
-    cols = st.columns(3)
-    year = cols[0].selectbox('Año', ['Todos'] + sorted({e['event_date'][:4] for e in base}))
-    category = cols[1].selectbox('Categoría', ['Todas'] + sorted({e['category'] for e in base}))
-    actor = cols[2].selectbox('Actor / institución', [None] + list(actor_names), format_func=lambda a: actor_names.get(a,'Todos'))
+    with st.container(border=True):
+        st.markdown('<div class="section-kicker">Filtrar la cronología</div>', unsafe_allow_html=True)
+        cols = st.columns(3)
+        year = cols[0].selectbox('Año', ['Todos'] + sorted({e['event_date'][:4] for e in base}))
+        category = cols[1].selectbox('Categoría', ['Todas'] + sorted({e['category'] for e in base}))
+        actor = cols[2].selectbox('Actor / institución', [None] + list(actor_names), format_func=lambda a: actor_names.get(a,'Todos'))
     events = records.timeline(None if year=='Todos' else year, None if category=='Todas' else category, actor, demo)
     c = st.columns(3)
     c[0].metric('Eventos en esta selección',len(events))
@@ -116,8 +181,10 @@ if page == 'Línea del tiempo':
     if not events:
         st.info('No hay eventos para esta selección. Ejecuta python seed_db.py y activa la demostración para explorar el MVP, o importa registros verificados.')
     for e in events:
+        st.markdown(f'<div class="timeline-marker"><div class="timeline-date">{html.escape(e["event_date"])} · {html.escape(category_label(e["category"]))}</div></div>', unsafe_allow_html=True)
         with st.container(border=True):
-            st.caption(e['event_date'] + ' · ' + e['category'] + (' · DEMO' if not e['verified'] else ' · Verificado'))
+            evidence_badge('Fuente verificada' if e['verified'] else 'No establecido / DEMO', 'verified' if e['verified'] else 'unresolved')
+            st.caption(e['event_date'] + ' · ' + category_label(e['category']) + (' · DEMO' if not e['verified'] else ' · Verificado'))
             st.markdown('### ' + e['title'])
             st.write(e['description'])
             st.caption(e['location'] or '')
@@ -130,8 +197,9 @@ if page == 'Línea del tiempo':
                     source_link(s)
                     st.caption(s['reliability_notes'])
 elif page == 'Pregúntale al archivo':
-    st.subheader('Preguntas al archivo, respuestas con evidencia')
-    st.caption('El agente separa evidencia verificada de reportes y análisis atribuidos revisados. La segunda capa no prueba por sí sola su afirmación subyacente. La búsqueda es acotada; no demuestra el primer aviso de toda la historia ni la ausencia de antecedentes.')
+    st.markdown('<div class="section-kicker">Consulta documental</div>', unsafe_allow_html=True)
+    st.header('Preguntas al archivo, respuestas con evidencia')
+    st.markdown('<p class="section-intro">El agente separa evidencia verificada de reportes y análisis atribuidos revisados. La segunda capa no prueba por sí sola su afirmación subyacente. La búsqueda es acotada: no demuestra por sí misma el primer aviso de toda la historia ni la ausencia de antecedentes.</p>', unsafe_allow_html=True)
     suggestions = ['¿Quién sabía qué y cuándo?','¿Qué advertencias existían antes de 2026?','¿Qué prometió SIAPA?','Muéstrame eventos relacionados con Las Pintas.','¿Quién era responsable del tratamiento del agua?']
     selected = None
     for i,q in enumerate(suggestions):
@@ -154,25 +222,28 @@ elif page == 'Pregúntale al archivo':
             render_result(result)
         st.session_state.messages.append({'question':question,'result':result})
 elif page == 'Comparar declaraciones':
-    st.subheader('Lo que se dijo, a través del tiempo')
-    st.caption('Una declaración es una atribución documentada. Su contenido no se considera verdadero por haber sido expresado por una autoridad.')
+    st.markdown('<div class="section-kicker">Registro de posiciones</div>', unsafe_allow_html=True)
+    st.header('Lo que se dijo, a través del tiempo')
+    st.markdown('<p class="section-intro">Una declaración es una atribución documentada. Su contenido no se considera verdadero por haber sido expresado por una autoridad.</p>', unsafe_allow_html=True)
     chosen = st.multiselect('Actores / instituciones', list(actor_names), format_func=lambda a: actor_names[a])
     rows = records.statements(chosen,demo)
     if not rows:
         st.info('Selecciona actores con declaraciones disponibles en este modo.')
     for row in rows:
         with st.container(border=True):
+            evidence_badge('Atribución documentada' if row['verified'] else 'No establecido / DEMO', 'verified' if row['verified'] else 'unresolved')
             st.caption(row['claim_date'] + (' · DEMO' if not row['verified'] else ' · Atribución verificada'))
             st.markdown('**' + row['name'] + '**')
             st.write(row['claim_text'])
             source_link(row)
 elif page == 'Compromisos':
-    st.subheader('De lo anunciado al seguimiento')
+    st.markdown('<div class="section-kicker">Seguimiento público</div>', unsafe_allow_html=True)
+    st.header('De lo anunciado al seguimiento')
     rows = records.commitments(demo)
     groups = {'Cumplidos':['completed'],'Pendientes':['announced','in_progress'],'Retrasados / incumplidos':['delayed','unfulfilled'],'Estado desconocido':['unknown']}
     for col,(label,statuses) in zip(st.columns(4),groups.items()):
         col.metric(label,sum(r['status'] in statuses for r in rows))
-    st.caption('El estado es editorial y requiere evidencia. Una fecha vencida no determina automáticamente un incumplimiento.')
+    st.markdown('<div class="commitment-note">El estado es editorial y requiere evidencia. Una fecha vencida no determina automáticamente un incumplimiento.</div>', unsafe_allow_html=True)
     status = st.selectbox('Filtrar estado',['Todos','announced','in_progress','completed','delayed','unfulfilled','unknown'])
     shown = [r for r in rows if status=='Todos' or r['status']==status]
     if not shown:
@@ -184,12 +255,24 @@ elif page == 'Compromisos':
             st.write('Evento relacionado: ' + (row['event_title'] or 'No vinculado'))
             source_link(row)
 else:
-    st.subheader('Evidencia que puedes inspeccionar')
-    st.write('Este archivo separa hechos documentados, declaraciones atribuidas, responsabilidades institucionales y compromisos. La selección inicial es una demostración ficticia; no contiene una investigación histórica de Guadalajara.')
+    st.markdown('<div class="section-kicker">Método y trazabilidad</div>', unsafe_allow_html=True)
+    st.header('Evidencia que puedes inspeccionar')
+    st.markdown('<p class="section-intro">El archivo separa hechos documentados, declaraciones atribuidas, responsabilidades institucionales y compromisos. No transforma una afirmación en un hecho por estar publicada o por venir de una autoridad.</p>', unsafe_allow_html=True)
+    method_columns = st.columns(3)
+    method_cards = [
+        ('Fuente verificada', 'badge-verified', 'Documento o registro revisado editorialmente. Puede respaldar lo que el documento establece, no conclusiones que no contiene.'),
+        ('Reporte / análisis atribuido', 'badge-attributed', 'Periodismo o análisis técnico revisado y citado. Se presenta como lo que sus autores o entrevistados reportaron, no como hecho probado.'),
+        ('No establecido', 'badge-unresolved', 'Hipótesis, vacíos, conflictos y datos de demostración. No entran como evidencia del agente ni se presentan como antecedentes comprobados.'),
+    ]
+    for col, (title, badge_class, text) in zip(method_columns, method_cards):
+        with col:
+            st.markdown(f'<div class="method-card"><span class="evidence-badge {badge_class}">{title}</span><h3>{title}</h3><p>{text}</p></div>', unsafe_allow_html=True)
+    st.markdown('### Criterio editorial')
     st.write('Para incorporar historia real, conserva la URL original, la fecha, la atribución y las notas de revisión. Marca verified=1 solo después de revisar el documento. Una fuente que documenta una declaración no demuestra que esa declaración sea cierta.')
     st.info('La búsqueda del agente usa como máximo 25 eventos y 50 registros por entidad relacionada. El SQL se construye con plantillas y parámetros; el modelo no ejecuta SQL libre.')
     for source in records.query('SELECT * FROM sources' + ('' if demo else ' WHERE verified=1') + ' ORDER BY publication_date'):
         with st.container(border=True):
+            evidence_badge('Fuente verificada' if source['verified'] else 'No establecido / DEMO', 'verified' if source['verified'] else 'unresolved')
             st.caption(f"S{source['id']} · {source['source_type']} · " + ('Verificada' if source['verified'] else 'DEMO / no verificada'))
             source_link(source)
             st.write(source['reliability_notes'])
@@ -197,6 +280,7 @@ else:
         st.markdown('### Reportes y análisis atribuidos revisados')
         for material in records.attributed_material():
             with st.container(border=True):
+                evidence_badge('Reporte / análisis atribuido', 'attributed')
                 st.caption(f"[S{material['id']}] · Reporte / análisis atribuido · {material['source_type']}")
                 source_link(material)
                 st.write(material['paraphrase'])
