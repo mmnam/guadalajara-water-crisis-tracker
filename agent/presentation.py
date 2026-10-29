@@ -6,7 +6,24 @@ CITATION_RE = re.compile(r'\s*\[S\d+\]')
 
 
 def source_label(source):
-    return 'Reporte / análisis atribuido' if source.get('evidence_tier') == 'attributed_reviewed' else 'Fuente verificada'
+    labels = {
+        'verified_document': 'Documento verificado',
+        'verified_official_statement': 'Declaración oficial verificada',
+        'verified_attribution': 'Declaración verificada',
+        'reviewed_journalism': 'Periodismo revisado',
+        'reviewed_analysis': 'Análisis atribuido',
+        'documented_complaint': 'Queja documentada',
+        'attributed_testimony': 'Testimonio atribuido',
+    }
+    if source.get('evidence_status') in labels:
+        return labels[source['evidence_status']]
+    if source.get('evidence_tier') == 'attributed_reviewed':
+        return 'Reporte / análisis atribuido'
+    return 'Fuente verificada' if source.get('evidence_tier') == 'verified' or source.get('verified') == 1 else 'Material revisado atribuido'
+
+
+def is_attributed_or_reviewed(source):
+    return source.get('evidence_tier') in ('attributed_reviewed', 'reviewed_usable')
 
 
 def _clean_text(value):
@@ -41,7 +58,7 @@ def validate_presentation(output, available):
                 raise ValueError(f'Invalid {key} citations')
             if any(source_id not in available for source_id in source_ids):
                 raise ValueError(f'Unknown {key} citation')
-            if any((available[source_id].get('evidence_tier') == 'attributed_reviewed') != attributed for source_id in source_ids):
+            if any(is_attributed_or_reviewed(available[source_id]) != attributed for source_id in source_ids):
                 raise ValueError(f'Wrong evidence tier in {key}')
             limitation = row.get('limitation')
             if limitation is not None and not isinstance(limitation, str):

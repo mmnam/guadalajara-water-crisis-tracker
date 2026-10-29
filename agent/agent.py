@@ -40,7 +40,7 @@ def ask(question):
         result['answer'] = insufficient
         result['notice'] = 'No hay evidencia verificada ni reporte atribuido revisado que identifique de forma explícita el partido o la administración solicitados.'
         return result
-    if not evidence['events'] and not evidence['attributed_evidence']:
+    if not evidence['events'] and not evidence['attributed_evidence'] and not evidence.get('reviewed_evidence'):
         result['answer'] = insufficient
         return result
     if not client:
@@ -57,6 +57,7 @@ def ask(question):
         model_evidence = {
             'verified_evidence': evidence['verified_evidence'],
             'attributed_evidence': evidence['attributed_evidence'],
+            'reviewed_evidence': evidence.get('reviewed_evidence', []),
             'scope': evidence['scope'],
         }
         response = client.chat.completions.create(model=model, messages=[{'role':'system','content':ANSWER},{'role':'system','content':citation_contract},{'role':'user','content':json.dumps({'question':question,'evidence':model_evidence},ensure_ascii=False)}], response_format={'type':'json_object'}, temperature=0)
@@ -99,7 +100,7 @@ def ask(question):
                 cited = set(ids)
         if not isinstance(answer, str) or not valid_id_list:
             raise ValueError('Invalid answer payload')
-        attributed_ids = {source['id'] for source in evidence['sources'] if source.get('evidence_tier') == 'attributed_reviewed'}
+        attributed_ids = {source['id'] for source in evidence['sources'] if source.get('evidence_tier') in ('attributed_reviewed', 'reviewed_usable')}
         if cited & attributed_ids:
             lowered_answer = answer.lower()
             attribution = r'(report|señal|senal|aleg|afirm|observ|según|segun|an[aá]lis|testimonio|entrevist)'

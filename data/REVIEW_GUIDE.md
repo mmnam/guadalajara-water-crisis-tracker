@@ -2,6 +2,17 @@
 
 **Corte de investigación: 28 de octubre de 2026.** `candidate_records.json` sigue siendo una capa de candidatos: todos sus registros permanecen `verified=0`. La primera importación controlada aprobó únicamente E1201, E1202, E1204, E1205, E1206, E1211, E1222, E1212, E1219, E1217, E1218 y E1220 en la representación separada [`approved_records.json`](approved_records.json); su alcance y límites están en [`APPROVED_RECORDS.md`](APPROVED_RECORDS.md). La fecha de una recomendación posterior no es la fecha de los expedientes anteriores que reproduce.
 
+## Promoción utilizable para la demostración
+
+[`usable_evidence_records.json`](usable_evidence_records.json) es una carga separada e idempotente: no cambia los candidatos ni sus banderas `verified=0`. Promueve únicamente el hecho de que una fuente ya leída publicó, entrevistó, observó o atribuyó algo. Conserva `evidence_status`, URL original, motivo de promoción y límite clave para cada fila.
+
+- **Promovidos como `reviewed_journalism`:** E1207, E1208, E1209, E1210, E1213, E1221, E1223, E1224, E1225, E1226 y E1227.
+- **Promovido como `reviewed_analysis`:** E1215.
+- **Representado como `attributed_testimony`:** E1214 ya está en A2103; no se duplica como una segunda fuente/evento.
+- **Excluidos como `unresolved`:** E1203 (página original UdeG inaccesible; solo extracto) y E1216 (reporte original de ZonaDocs inaccesible y referencia posterior retrospectiva).
+
+Los doce expedientes ya aprobados conservan su clasificación editorial por alcance: documento verificado, declaración oficial verificada o queja documentada. Los seis A2101–A2106 siguen siendo materiales atribuidos revisados; su presentación concreta usa `reviewed_analysis`, `reviewed_journalism`, `attributed_testimony` o `verified_attribution` según lo que permite afirmar cada original. Ninguna de estas categorías prueba por sí sola una causalidad, contaminación, responsabilidad o cumplimiento.
+
 ## Cómo revisar y aprobar
 
 1. Abra las fuentes originales y compruebe en la ubicación indicada la fecha, alcance, actor y atribución. Los enlaces con acceso `snippet_only` o `link_only` requieren abrir el texto completo.

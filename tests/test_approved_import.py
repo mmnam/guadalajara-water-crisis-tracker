@@ -16,6 +16,7 @@ from services import records
 ROOT = Path(__file__).resolve().parents[1]
 APPROVED = ROOT / 'data' / 'approved_records.json'
 ATTRIBUTED = ROOT / 'data' / 'attributed_reviewed_records.json'
+USABLE = ROOT / 'data' / 'usable_evidence_records.json'
 APPROVED_IDS = {1201, 1202, 1204, 1205, 1206, 1211, 1222, 1212, 1219, 1217, 1218, 1220}
 
 
@@ -30,6 +31,7 @@ class ApprovedImportTest(unittest.TestCase):
         seed()  # Deliberately keep the fictional fixtures isolated in the same DB.
         seed(APPROVED)
         seed(ATTRIBUTED)
+        seed(USABLE)
 
     def tearDown(self):
         self.env.stop()
@@ -47,10 +49,72 @@ class ApprovedImportTest(unittest.TestCase):
             self.assertEqual(conn.execute('SELECT count(*) FROM events WHERE id >= 1200').fetchone()[0], 12)
 
     def test_normal_mode_excludes_demo_and_unverified_claims(self):
-        visible = {row['id'] for row in records.timeline()}
-        self.assertEqual(visible, APPROVED_IDS)
+        visible = records.timeline()
+        visible_ids = {row['id'] for row in visible}
+        self.assertTrue(APPROVED_IDS.issubset(visible_ids))
+        self.assertIn(3001, visible_ids)
+        self.assertIn(2103, visible_ids)
         self.assertNotIn(1, visible)
+        self.assertTrue(all(row['evidence_status'] != 'unresolved' for row in visible))
         self.assertEqual(records.statements([1001]), [])
+
+    def test_usable_promotion_is_idempotent_and_excludes_unresolved_candidates(self):
+        with connect(read_only=True) as conn:
+            self.assertEqual(conn.execute('SELECT count(*) FROM usable_evidence').fetchone()[0], 12)
+            self.assertEqual(conn.execute("SELECT count(*) FROM usable_evidence WHERE evidence_status='unresolved'").fetchone()[0], 0)
+        seed(USABLE)
+        with connect(read_only=True) as conn:
+            self.assertEqual(conn.execute('SELECT count(*) FROM usable_evidence').fetchone()[0], 12)
+
+    def test_reviewed_journalism_analysis_and_testimony_are_separate_usable_statuses(self):
+        journalism, _ = retrieve({'terms': ['campaña'], 'before_year': None, 'before_date': None})
+        self.assertIn(3001, {row['id'] for row in journalism['reviewed_evidence']})
+        self.assertEqual(next(row for row in journalism['reviewed_evidence'] if row['id'] == 3001)['evidence_status'], 'reviewed_journalism')
+        analysis, _ = retrieve({'terms': ['mesa técnica'], 'before_year': None, 'before_date': None})
+        self.assertEqual(next(row for row in analysis['reviewed_evidence'] if row['id'] == 3006)['evidence_status'], 'reviewed_analysis')
+        testimony, _ = retrieve({'terms': ['trabajadores'], 'before_year': None, 'before_date': None})
+        self.assertEqual(next(row for row in testimony['attributed_evidence'] if row['id'] == 2103)['evidence_status'], 'attributed_testimony')
+
+    def test_timeline_supports_status_and_source_type_filters(self):
+        journalism = records.timeline(evidence_status='reviewed_journalism')
+        self.assertTrue(journalism)
+        self.assertTrue(all(row['evidence_status'] == 'reviewed_journalism' for row in journalism))
+        analysis = records.timeline(evidence_status='reviewed_analysis')
+        self.assertIn(3006, {row['id'] for row in analysis})
+        self.assertTrue(all(row['evidence_status'] == 'reviewed_analysis' for row in analysis))
+        investigation_sources = records.timeline(source_type='investigation')
+        self.assertEqual({row['id'] for row in investigation_sources}, {3007})
+
+    def test_reviewed_journalism_status_survives_citation_and_structured_rendering(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['campaña'], 'before_year': None, 'before_date': None}),
+            response({
+                'summary': 'El archivo conserva el reportaje como cobertura revisada, no como resolución de sus acusaciones.',
+                'verified_findings': [],
+                'attributed_findings': [{
+                    'date': '2023-08-15', 'title': 'Campaña #SiapaCorrupto', 'author': 'Mario Marlo / ZonaDocs',
+                    'text': 'ZonaDocs reportó el lanzamiento de la campaña y sus reclamos.',
+                    'source_ids': [1104], 'limitation': 'Las acusaciones permanecen atribuidas.',
+                }],
+                'limitations': ['No se establece la veracidad de las acusaciones de la campaña.'],
+                'source_ids': [1104],
+            }),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué reportó ZonaDocs sobre la campaña #SiapaCorrupto?')
+        self.assertEqual(result['sources'][0]['evidence_status'], 'reviewed_journalism')
+        self.assertEqual(result['sources'][0]['url'], 'https://www.zonadocs.mx/2023/08/15/siapacorrupto-colectivos-ciudadanos-unen-fuerzas-contra-la-corrupcion-en-el-manejo-del-agua-en-guadalajara/')
+        self.assertEqual(result['presentation']['attributed_findings'][0]['source_ids'], [1104])
+
+    def test_broad_demo_questions_use_the_chronological_corpus(self):
+        for question in ('¿Qué pasó entre 2020 y 2026?', '¿Qué sabemos con certeza y qué sigue siendo una denuncia o interpretación?'):
+            evidence, _ = retrieve(fallback_plan(question))
+            self.assertTrue(evidence['events'], question)
+            self.assertTrue(evidence['reviewed_evidence'], question)
+            self.assertTrue(evidence['attributed_evidence'], question)
 
     def test_every_approved_event_has_a_verified_source_link(self):
         with connect(read_only=True) as conn:
@@ -92,8 +156,8 @@ class ApprovedImportTest(unittest.TestCase):
             self.assertTrue(expected.issubset(ids), question)
             self.assertTrue(evidence['sources'], question)
             self.assertTrue(all(
-                source['url'] and (
-                    source.get('evidence_tier') == 'attributed_reviewed'
+                    source['url'] and (
+                    source.get('evidence_tier') in ('attributed_reviewed', 'reviewed_usable')
                     or source.get('verified') == 1
                 )
                 for source in evidence['sources']

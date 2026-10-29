@@ -1,7 +1,7 @@
 import json
 from database.db import ROOT, connect, initialize
 
-TABLES = ('actors', 'events', 'sources', 'attributed_material', 'event_sources', 'event_actors', 'claims', 'responsibilities', 'commitments')
+TABLES = ('actors', 'events', 'sources', 'attributed_material', 'usable_evidence', 'event_sources', 'event_actors', 'claims', 'responsibilities', 'commitments')
 
 def seed(path=None):
     """Import records transactionally. Existing IDs are preserved, never overwritten."""

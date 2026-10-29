@@ -61,7 +61,7 @@ page = st.sidebar.radio('Explorar el archivo', ['Línea del tiempo','Pregúntale
 st.sidebar.markdown('#### Controles de lectura')
 demo = st.sidebar.toggle('Mostrar datos de demostración', value=False)
 st.sidebar.markdown('<div class="sidebar-note">La verificación es una revisión editorial de la fuente. No establece culpabilidad ni convierte una declaración en un hecho.</div>', unsafe_allow_html=True)
-st.markdown('''<section class="archive-hero"><div class="archive-kicker">Zona Metropolitana de Guadalajara · Archivo público</div><h1>Memoria Hídrica GDL</h1><p class="archive-deck">Una memoria verificable de cómo llegamos hasta aquí.</p><p>Eventos, advertencias, decisiones, declaraciones y compromisos sobre la crisis del agua; cada registro conserva su fuente, atribución y límites de evidencia.</p></section>''', unsafe_allow_html=True)
+st.markdown('''<section class="archive-hero"><div class="archive-kicker">Zona Metropolitana de Guadalajara · Archivo público</div><h1>Memoria Hídrica GDL</h1><p class="archive-deck">Explora todo el contexto: una memoria verificable de cómo llegamos hasta aquí. Combatiendo la "memoria de pez" </p><p>Eventos, advertencias, decisiones, declaraciones y compromisos sobre la crisis del agua. Por que la historia no comienza cada que nos despertamos. Cada registro conserva su fuente, atribución y límites de evidencia.</p></section>''', unsafe_allow_html=True)
 if demo:
     st.warning('MODO DEMO · Los registros marcados DEMO son ficticios. No describen hechos, instituciones ni responsabilidades reales. El agente siempre excluye estos registros.')
 
@@ -92,8 +92,33 @@ def category_label(category):
         'official_statement': 'Declaración oficial',
         'investigation': 'Investigación',
         'recommendation': 'Recomendación',
+        'reviewed_journalism': 'Periodismo revisado',
+        'reviewed_analysis': 'Análisis de especialista',
+        'attributed_testimony': 'Testimonio atribuido',
+        'verified_attribution': 'Declaración verificada',
     }
     return labels.get(category, category.replace('_', ' ').capitalize())
+
+
+def status_label(status):
+    return {
+        'verified_document': 'Documento verificado',
+        'verified_official_statement': 'Declaración oficial',
+        'verified_attribution': 'Declaración verificada',
+        'reviewed_journalism': 'Periodismo revisado',
+        'reviewed_analysis': 'Análisis atribuido',
+        'documented_complaint': 'Queja documentada',
+        'attributed_testimony': 'Testimonio atribuido',
+        'unresolved': 'No establecido',
+    }.get(status, category_label(status))
+
+
+def status_badge_kind(status):
+    if status in ('verified_document', 'verified_official_statement', 'documented_complaint'):
+        return 'verified'
+    if status == 'unresolved':
+        return 'unresolved'
+    return 'attributed'
 
 
 def render_finding(finding, label, kind):
@@ -142,10 +167,12 @@ def render_result(result):
         st.caption('No hay fuentes citadas en esta respuesta.')
     for s in result['sources']:
         with st.container(border=True):
-            evidence_badge(source_label(s), 'verified' if s.get('evidence_tier') != 'attributed_reviewed' else 'attributed')
+            evidence_badge(source_label(s), 'verified' if s.get('evidence_tier') == 'verified' or s.get('verified') else status_badge_kind(s.get('evidence_status')))
             st.markdown(f"**[S{s['id']}] · {source_label(s)}**")
             st.caption(f"{s['publisher']} · {s['publication_date']} · {s['source_type']}")
             source_link(s)
+            if s.get('reliability_notes'):
+                st.caption(s['reliability_notes'])
     with st.expander('Ver consultas SQL · SELECT / solo lectura'):
         for trace in result['traces']:
             st.code(trace['sql'], language='sql')
@@ -167,35 +194,51 @@ if page == 'Línea del tiempo':
     st.header('El presente tiene una historia')
     st.markdown('<p class="section-intro">Una cronología para situar qué se documentó, qué se dijo y qué quedó pendiente antes y durante la crisis. Cada ficha conserva la fuente y sus límites.</p>', unsafe_allow_html=True)
     base = records.timeline(demo=demo)
+    timeline_actor_names = sorted({name.strip() for event in base for name in (event.get('actor_names') or '').split('|') if name.strip()})
+    status_options = ['Todos'] + sorted({event['evidence_status'] for event in base})
+    source_type_options = ['Todos'] + sorted({event.get('source_type') for event in base if event.get('source_type')})
     with st.container(border=True):
         st.markdown('<div class="section-kicker">Filtrar la cronología</div>', unsafe_allow_html=True)
-        cols = st.columns(3)
+        cols = st.columns(5)
         year = cols[0].selectbox('Año', ['Todos'] + sorted({e['event_date'][:4] for e in base}))
-        category = cols[1].selectbox('Categoría', ['Todas'] + sorted({e['category'] for e in base}))
-        actor = cols[2].selectbox('Actor / institución', [None] + list(actor_names), format_func=lambda a: actor_names.get(a,'Todos'))
-    events = records.timeline(None if year=='Todos' else year, None if category=='Todas' else category, actor, demo)
-    c = st.columns(3)
-    c[0].metric('Eventos en esta selección',len(events))
+        category = cols[1].selectbox('Categoría', ['Todas'] + sorted({e['category'] for e in base}), format_func=lambda value: 'Todas' if value == 'Todas' else category_label(value))
+        evidence_status = cols[2].selectbox('Tipo de evidencia', status_options, format_func=lambda value: 'Todos' if value == 'Todos' else status_label(value))
+        actor = cols[3].selectbox('Actor / institución', ['Todos'] + timeline_actor_names)
+        source_type = cols[4].selectbox('Tipo de fuente', source_type_options, format_func=lambda value: 'Todos' if value == 'Todos' else value.replace('_', ' '))
+    events = records.timeline(
+        None if year=='Todos' else year, None if category=='Todas' else category,
+        None if actor=='Todos' else actor, demo,
+        None if evidence_status=='Todos' else evidence_status,
+        None if source_type=='Todos' else source_type,
+    )
+    c = st.columns(4)
+    c[0].metric('Registros en esta selección',len(events))
     c[1].metric('Años representados',len({e['event_date'][:4] for e in events}))
-    c[2].metric('Eventos verificados',sum(e['verified'] for e in events))
+    c[2].metric('Documentos / actuaciones verificadas',sum(e['evidence_tier'] == 'verified' for e in events))
+    c[3].metric('Reportes, análisis y testimonios revisados',sum(e['evidence_tier'] != 'verified' for e in events))
     if not events:
         st.info('No hay eventos para esta selección. Ejecuta python seed_db.py y activa la demostración para explorar el MVP, o importa registros verificados.')
     for e in events:
-        st.markdown(f'<div class="timeline-marker"><div class="timeline-date">{html.escape(e["event_date"])} · {html.escape(category_label(e["category"]))}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="timeline-marker"><div class="timeline-date">{html.escape(e["event_date"])} · {html.escape(status_label(e["evidence_status"]))}</div></div>', unsafe_allow_html=True)
         with st.container(border=True):
-            evidence_badge('Fuente verificada' if e['verified'] else 'No establecido / DEMO', 'verified' if e['verified'] else 'unresolved')
-            st.caption(e['event_date'] + ' · ' + category_label(e['category']) + (' · DEMO' if not e['verified'] else ' · Verificado'))
+            evidence_badge(status_label(e['evidence_status']), status_badge_kind(e['evidence_status']))
+            demo_marker = ' · DEMO' if e['record_kind'] == 'verified' and not e['verified'] else ''
+            st.caption(e['event_date'] + ' · ' + category_label(e['category']) + (demo_marker or ' · ' + e['evidence_tier']))
             st.markdown('### ' + e['title'])
             st.write(e['description'])
             st.caption(e['location'] or '')
-            involved = records.query('SELECT a.name FROM actors a JOIN event_actors ea ON ea.actor_id=a.id WHERE ea.event_id=?',(e['id'],))
-            if involved:
-                st.write('Actores: ' + ', '.join(a['name'] for a in involved))
+            if e.get('actor_names'):
+                st.write('Actores: ' + e['actor_names'].replace(' | ', ', '))
             with st.expander('Contexto y fuentes'):
                 st.write(e['significance'])
-                for s in records.sources(e['id']):
-                    source_link(s)
-                    st.caption(s['reliability_notes'])
+                if e['record_kind'] == 'verified':
+                    for s in records.sources(e['id']):
+                        source_link(s)
+                        st.caption(s['reliability_notes'])
+                else:
+                    source_link({'title': e['source_title'], 'url': e['url']})
+                    st.caption(e['reliability_notes'])
+                    st.markdown(f'<div class="uncertainty-box"><strong>Límite de evidencia.</strong> {html.escape(e["key_limitation"])}</div>', unsafe_allow_html=True)
 elif page == 'Pregúntale al archivo':
     st.markdown('<div class="section-kicker">Consulta documental</div>', unsafe_allow_html=True)
     st.header('Preguntas al archivo, respuestas con evidencia')
@@ -270,18 +313,14 @@ else:
     st.markdown('### Criterio editorial')
     st.write('Para incorporar historia real, conserva la URL original, la fecha, la atribución y las notas de revisión. Marca verified=1 solo después de revisar el documento. Una fuente que documenta una declaración no demuestra que esa declaración sea cierta.')
     st.info('La búsqueda del agente usa como máximo 25 eventos y 50 registros por entidad relacionada. El SQL se construye con plantillas y parámetros; el modelo no ejecuta SQL libre.')
-    for source in records.query('SELECT * FROM sources' + ('' if demo else ' WHERE verified=1') + ' ORDER BY publication_date'):
+    for source in records.usable_sources():
         with st.container(border=True):
-            evidence_badge('Fuente verificada' if source['verified'] else 'No establecido / DEMO', 'verified' if source['verified'] else 'unresolved')
-            st.caption(f"S{source['id']} · {source['source_type']} · " + ('Verificada' if source['verified'] else 'DEMO / no verificada'))
+            evidence_badge(source_label(source), status_badge_kind(source.get('evidence_status')))
+            st.caption(f"S{source['id']} · {source['source_type']} · {source_label(source)}")
+            st.markdown(f"**{source['title']}**")
+            if source.get('author'):
+                st.caption(f"{source['author']} · {source.get('publisher', '')} · {source.get('publication_date', '')}")
             source_link(source)
             st.write(source['reliability_notes'])
-    if not demo:
-        st.markdown('### Reportes y análisis atribuidos revisados')
-        for material in records.attributed_material():
-            with st.container(border=True):
-                evidence_badge('Reporte / análisis atribuido', 'attributed')
-                st.caption(f"[S{material['id']}] · Reporte / análisis atribuido · {material['source_type']}")
-                source_link(material)
-                st.write(material['paraphrase'])
-                st.caption(material['review_notes'])
+            if source.get('key_limitation'):
+                st.caption('Límite: ' + source['key_limitation'])
