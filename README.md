@@ -1,6 +1,6 @@
 # Memoria Hídrica GDL
 
-**Una memoria verificable de cómo llegamos hasta aquí.**
+**Una memoria verificable de cómo llegamos hasta aquí. Combatiendo la "memoria de pez"**
 
 MVP local en Python y Streamlit para reconstruir la historia de la crisis del agua en Guadalajara. Reúne eventos, fuentes, declaraciones, responsabilidades institucionales y compromisos para evitar que la discusión pública pierda sus antecedentes. No atribuye culpabilidad.
 
@@ -59,6 +59,7 @@ flowchart LR
 | events | Fecha, título, descripción, categoría, ubicación y relevancia |
 | sources | Título, editor, URL original, fecha, tipo y notas de confiabilidad |
 | attributed_material | Reportaje, análisis, testimonio o post directamente revisado; conserva autor, cuenta, URL, alcance, corroboración y `evidence_tier=attributed_reviewed` |
+| usable_evidence | Promoción separada de periodismo/análisis ya revisados; conserva `evidence_status`, URL original, motivo y límite. No vuelve verdadero el contenido atribuido. |
 | event_sources | Relación muchos a muchos entre eventos y fuentes |
 | event_actors | Relación explícita entre eventos y actores, utilizada por filtros |
 | claims | Declaración atribuida a un actor, fecha, evento y fuente |
@@ -71,8 +72,8 @@ Las entidades editoriales tienen `verified` (0/1). En declaraciones, significa q
 
 1. Recibe una pregunta y pide al modelo términos de búsqueda y un año límite opcional. Si la API falla, utiliza términos locales.
 2. Construye SELECT parametrizados mediante plantillas controladas; nunca ejecuta SQL escrito por el modelo.
-3. Recupera hasta 25 eventos verificados con fuente verificada y URL, actores vinculados, hasta 50 declaraciones/compromisos/responsabilidades y sus fuentes; también puede recuperar hasta 25 filas explícitamente marcadas `reviewed_attributed`.
-4. Entrega ambas capas al modelo por separado. La capa atribuida solo sustenta que su autor reportó, alegó, observó o analizó algo, nunca que la proposición subyacente quedó probada.
+3. Recupera hasta 25 eventos verificados con fuente verificada y URL, actores vinculados, hasta 50 declaraciones/compromisos/responsabilidades y sus fuentes; también puede recuperar hasta 25 filas explícitamente marcadas `reviewed_attributed` y 25 promociones `reviewed_usable`.
+4. Entrega las capas verificadas, atribuidas y revisadas al modelo por separado. Las dos últimas solo sustentan que su autor, fuente o entrevistado reportó, alegó, observó o analizó algo, nunca que la proposición subyacente quedó probada.
 5. Valida que las citas `[S1]` correspondan a los IDs recuperados y muestra las URLs originales por separado. Las respuestas con citas inválidas se descartan.
 
 El modo SQLite `ro`, `query_only` y un autorizador restringen las consultas del agente a lectura. No hay consola de SQL arbitrario. Los parámetros se muestran aparte del SQL para hacer visible la consulta real.
@@ -90,6 +91,8 @@ El modo SQLite `ro`, `query_only` y un autorizador restringen las consultas del 
 ```bash
 python seed_db.py --file data/verified_records.json
 ```
+
+La demostración histórica actual se compone de tres cargas separadas: `approved_records.json`, `attributed_reviewed_records.json` y `usable_evidence_records.json`. La última es una promoción editorial idempotente de reportajes/análisis ya revisados; conserva las filas candidatas sin modificar y excluye lo marcado como `unresolved`.
 
 El importador es transaccional e idempotente: preserva IDs existentes y no sobrescribe registros. Para corregir un registro existente, edita SQLite mediante una herramienta local de confianza, fuera del agente; respalda el archivo antes. No existe interfaz administrativa en este MVP. `DATABASE_PATH` permite usar una base distinta para datos reales. La aplicación sin seed crea un esquema vacío y muestra un estado inicial útil.
 

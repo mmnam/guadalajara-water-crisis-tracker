@@ -18,6 +18,16 @@ CREATE TABLE IF NOT EXISTS attributed_material (
  supporting_documents TEXT, underlying_documents_retrieved INTEGER NOT NULL DEFAULT 0 CHECK(underlying_documents_retrieved IN (0,1)),
  corroboration_status TEXT NOT NULL, review_status TEXT NOT NULL CHECK(review_status='reviewed_attributed'),
  evidence_tier TEXT NOT NULL CHECK(evidence_tier='attributed_reviewed'), review_notes TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS usable_evidence (
+ id INTEGER PRIMARY KEY, candidate_id INTEGER UNIQUE,
+ event_date TEXT NOT NULL, title TEXT NOT NULL, description TEXT NOT NULL,
+ category TEXT NOT NULL, location TEXT, significance TEXT NOT NULL,
+ evidence_status TEXT NOT NULL CHECK(evidence_status IN ('verified_document','verified_official_statement','verified_attribution','reviewed_journalism','reviewed_analysis','documented_complaint','attributed_testimony')),
+ evidence_tier TEXT NOT NULL CHECK(evidence_tier='reviewed_usable'),
+ review_status TEXT NOT NULL CHECK(review_status='reviewed_usable'),
+ source_id INTEGER NOT NULL, source_title TEXT NOT NULL, source_author TEXT,
+ publisher TEXT, url TEXT NOT NULL, publication_date TEXT, source_type TEXT,
+ reliability_notes TEXT NOT NULL, key_limitation TEXT NOT NULL, actor_names TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS event_sources (
  event_id INTEGER REFERENCES events(id), source_id INTEGER REFERENCES sources(id),
  PRIMARY KEY(event_id,source_id));
