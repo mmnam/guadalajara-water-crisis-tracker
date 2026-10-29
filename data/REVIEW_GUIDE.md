@@ -117,6 +117,16 @@ Los candidatos 1201, 1202, 1204, 1205, 1211, 1212, 1217, 1218 y 1220 tienen resp
 - **Fuentes:**
   - S1102 · primary · CEDHJ · 2026-04-30 · CEDHJ · human_rights_report · acceso read · [Recomendación 10/2026](https://cedhj.org.mx/assets_web/doc/recomendaciones/emitidas/2026/20260430150739/recomendacion_1777583259457.pdf)
 
+### E1222 · 2025-09-19 · CONAGUA notifica a SIAPA riesgo en la descarga de Arroyo Seco
+- **Prioridad / estado:** alta / primary_source_found.
+- **Actores:** Comisión Nacional del Agua (CONAGUA), Sistema Intermunicipal de los Servicios de Agua Potable y Alcantarillado (SIAPA).
+- **Qué establece la evidencia:** La Recomendación 10/2026, p. 63, reproduce que el comunicado CONAGUA **BOO.812.01625**, de 19 de septiembre de 2025, notificó al titular del SIAPA una afectación del temporal en la descarga de Arroyo Seco al Canal Las Pintas y solicitó intervención y remediación urgente. El riesgo descrito era un posible rompimiento de talud, inundaciones y afectaciones en la zona, con riesgo para el sistema de abasto de la ZMG.
+- **Incertidumbre:** La recomendación dice que se adjuntó copia; el original autónomo de CONAGUA no apareció en una búsqueda focalizada por su número. Este candidato se apoya en esa copia/reproducción en el expediente CEDHJ. No prueba que CONAGUA hubiera advertido específicamente sobre la contaminación de agua potable de octubre de 2026, ni que la remediación se ejecutara o fuera eficaz.
+- **Seguimiento posterior:** El mismo pasaje dice que SIAPA pidió a CEA apoyo para contratar con urgencia una empresa y que CEA programó recursos e inició contratación. No se crea un evento separado: el pasaje no fecha ni la petición de SIAPA, ni el inicio del procedimiento, ni la intervención; el oficio CEA que lo relata fue recibido el 7 de noviembre de 2025.
+- **Relevancia histórica:** Registra un aviso formal de riesgo de infraestructura/ambiental en Arroyo Seco–Canal Las Pintas, no una determinación técnica de la causa de una crisis posterior.
+- **Fuentes:**
+  - S1102 · primary · CEDHJ · 2026-04-30 · CEDHJ · human_rights_report · acceso read · [Recomendación 10/2026](https://cedhj.org.mx/assets_web/doc/recomendaciones/emitidas/2026/20260430150739/recomendacion_1777583259457.pdf)
+
 ### E1212 · 2026-01-14 · Queja colectiva por agua e infraestructura en La Duraznera
 - **Prioridad / estado:** alta / primary_source_found.
 - **Actores:** Comisión Estatal de Derechos Humanos Jalisco (CEDHJ), Sistema Intermunicipal de los Servicios de Agua Potable y Alcantarillado (SIAPA), Ayuntamiento de San Pedro Tlaquepaque.
@@ -135,6 +145,16 @@ Los candidatos 1201, 1202, 1204, 1205, 1211, 1212, 1217, 1218 y 1220 tienen resp
 - **Fuentes:**
   - S1108 · secondary · Gaceta UDG · 2026-01-28 · Gaceta UDG · news · acceso read · [Olores ofensivos, la realidad cotidiana en El Salto, Juanacatlán y Las Pintas](https://www.gaceta.udg.mx/olores-ofensivos-la-realidad-cotidiana-en-el-salto-juanacatlan-y-las-pintas/)
   - S1126 · primary · Universidad de Guadalajara y colaboradores · fecha de publicación no confirmada · autor no confirmado · academic · acceso link_only · [Olores ofensivos en El Salto, Juanacatlán y Las Pintas, Jalisco](https://www.seguirenlatierra.org/wp-content/uploads/2025/11/Estudio-exploratorio-olores-ofensivos_ISBN.pdf)
+
+### E1219 · 2026-03-05 · CEDHJ abre Acta de Investigación 15/2026/DQOS
+- **Prioridad / estado:** alta / primary_source_found.
+- **Actores:** Comisión Estatal de Derechos Humanos Jalisco (CEDHJ), Sistema Intermunicipal de los Servicios de Agua Potable y Alcantarillado (SIAPA).
+- **Qué establece la evidencia:** Recomendación 10/2026, p. 74, apartado 1.4, arábigos 1–2. A raíz de una nota de *El Informador* titulada «SIAPA reconoce problemas en calidad del agua», CEDHJ abrió de oficio el Acta de Investigación 15/2026/DQOS. Ese mismo día requirió al titular de SIAPA informar si había obras en tuberías, cuáles eran las causas del problema de calidad, qué protocolo se aplicaba y en qué plazo se estimaba resolverlo.
+- **Incertidumbre:** La nota periodística es el antecedente que activó la actuación; esta fuente no verifica por sí misma sus afirmaciones fácticas ni la causa del problema. El candidato registra la apertura de la investigación y el requerimiento de CEDHJ, no la conclusión de que hubiese obras, una causa identificada o un plazo cierto.
+- **Relación con E1217:** La respuesta de SIAPA mediante oficio DJ/099/2026, recibida el 15 de abril, sigue siendo un evento posterior y separado (E1217); no se fusiona con la actuación de CEDHJ del 5 de marzo.
+- **Relevancia histórica:** Documenta conocimiento y actuación institucional de CEDHJ antes de la respuesta formal de SIAPA.
+- **Fuentes:**
+  - S1102 · primary · CEDHJ · 2026-04-30 · CEDHJ · human_rights_report · acceso read · [Recomendación 10/2026](https://cedhj.org.mx/assets_web/doc/recomendaciones/emitidas/2026/20260430150739/recomendacion_1777583259457.pdf)
 
 ### E1214 · 2026-03-13 · Personal entrevistado denuncia descargas y falta de equipo
 - **Prioridad / estado:** alta / needs_additional_source.
@@ -263,6 +283,8 @@ Los candidatos 1201, 1202, 1204, 1205, 1211, 1212, 1217, 1218 y 1220 tienen resp
 - **E1208 / E1210:** localizar seguimiento oficial de CEDHJ y comunicado/datos de la campaña. Aceptación de puntos no equivale a cumplimiento.
 - **E1213 / E1214 / E1221:** revisar estudio de olores, identificar entrevista original y registros de avisos a SIAPA, y obtener protocolos y resultados originales de monitoreo; no confundir olores ambientales con composición del agua potable.
 - **E1217 / E1218:** contrastar los oficios, inspecciones y coordenadas de ambas versiones; no inferir que una sea verdadera solo por tratarse de una autoridad.
+- **E1219:** obtener la nota original que motivó el acta, pero mantenerla separada de la apertura de oficio y del oficio SIAPA DJ/099/2026.
+- **E1222:** solicitar o localizar el original de CONAGUA BOO.812.01625 y los documentos fechados de la solicitud SIAPA–CEA, contratación, intervención y recepción; el pasaje retrospectivo no permite fechar esas acciones de seguimiento.
 - **E1223 / E1225 / E1226 / E1227:** obtener texto oficial del decreto, órdenes y anuncios, calendario de rotación, inventario de colectores y proyecto de inversión.
 
 ## Pistas interesantes aún no listas

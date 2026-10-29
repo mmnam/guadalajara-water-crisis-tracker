@@ -1029,6 +1029,30 @@
       ]
     },
     {
+      "id": 1222,
+      "event_date": "2025-09-19",
+      "date_precision": "day",
+      "title": "CONAGUA notifica a SIAPA riesgo en la descarga de Arroyo Seco",
+      "description": "La CEDHJ reproduce que CONAGUA, mediante el comunicado BOO.812.01625, notificó al titular del SIAPA y solicitó intervención y remediación urgente por una afectación del temporal en la descarga de Arroyo Seco al Canal Las Pintas.",
+      "category": "formal_notification",
+      "location": "Descarga de Arroyo Seco al Canal Las Pintas",
+      "significance": "Registra una comunicación institucional sobre riesgo de infraestructura y suministro en la ZMG antes de 2026, sin atribuirle una advertencia específica sobre la contaminación de agua potable de octubre de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 63 reproduce una copia del comunicado BOO.812.01625, fechado el 19 de septiembre de 2025.",
+        "notes": "La copia/reproducción en la recomendación sustenta que CONAGUA notificó y pidió intervención/remediación por el riesgo de posible rompimiento de talud, inundaciones, afectaciones cercanas y riesgo para el abasto de la ZMG. El original autónomo de CONAGUA no se recuperó en la búsqueda focalizada. No prueba una advertencia sobre la contaminación de agua potable de octubre de 2026 ni que la remediación se completara.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "formal_notification",
+        "institutional_warning",
+        "remediation_request",
+        "infrastructure_risk",
+        "institution_informed"
+      ]
+    },
+    {
       "id": 1213,
       "event_date": "2026-01-28",
       "date_precision": "day",
@@ -1046,6 +1070,29 @@
       },
       "knowledge_metadata": [
         "scientific_warning"
+      ]
+    },
+    {
+      "id": 1219,
+      "event_date": "2026-03-05",
+      "date_precision": "day",
+      "title": "CEDHJ abre Acta de Investigación 15/2026/DQOS",
+      "description": "La CEDHJ abrió de oficio el Acta de Investigación 15/2026/DQOS a partir de una nota de El Informador titulada «SIAPA reconoce problemas en calidad del agua» y requirió al titular del SIAPA informar sobre obras en tuberías, causa del problema, protocolo de atención y plazo estimado de resolución.",
+      "category": "investigation",
+      "location": "Área de suministro de la Planta Potabilizadora No. 1, Área Metropolitana de Guadalajara",
+      "significance": "Distingue la apertura institucional y el requerimiento formal de CEDHJ de la nota que la motivó y de la respuesta posterior de SIAPA del 15 de abril (E1217).",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 74, apartado 1.4, arábigos 1–2, registra la apertura de oficio y el requerimiento remitido a SIAPA.",
+        "notes": "La recomendación acredita la actuación procedimental de CEDHJ y el contenido de sus preguntas; no verifica por sí sola los hechos o la causa informados por la nota periodística. No fusionar este evento con la respuesta DJ/099/2026 recibida el 15 de abril, ya representada en E1217.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "investigation",
+        "institution_informed",
+        "formal_request",
+        "water_quality"
       ]
     },
     {
@@ -1624,6 +1671,26 @@
       "review": {
         "status": "needs_review",
         "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1219,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que la recomendación respalda la actuación procedimental descrita.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1222,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar el alcance de la copia del comunicado reproducida por CEDHJ.",
         "notes": "Revisión humana pendiente; no es una aprobación."
       }
     }
@@ -2341,6 +2408,46 @@
     },
     {
       "event_id": 1227,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1219,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1219,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1222,
+      "actor_id": 1011,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1222,
       "actor_id": 1001,
       "verified": 0,
       "review": {
