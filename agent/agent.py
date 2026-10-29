@@ -27,7 +27,8 @@ def ask(question):
         try:
             response = client.chat.completions.create(model=model, messages=[{'role':'system','content':PLANNER},{'role':'user','content':question}], response_format={'type':'json_object'}, temperature=0)
             proposed = json.loads(response.choices[0].message.content)
-            valid_date = isinstance(proposed, dict) and (proposed.get('before_date') is None or isinstance(proposed.get('before_date'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', proposed['before_date']))
+            allows_date_cutoff = bool(re.search(r'\b(antes de|before)\b', question.lower()))
+            valid_date = isinstance(proposed, dict) and (proposed.get('before_date') is None or allows_date_cutoff and isinstance(proposed.get('before_date'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', proposed['before_date']))
             if isinstance(proposed, dict) and isinstance(proposed.get('terms'), list) and (proposed.get('before_year') is None or isinstance(proposed.get('before_year'), int) and 1 <= proposed['before_year'] <= 9999) and valid_date:
                 plan = proposed
         except (OpenAIError, ValueError, TypeError):

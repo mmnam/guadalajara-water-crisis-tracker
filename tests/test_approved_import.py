@@ -161,6 +161,10 @@ class ApprovedImportTest(unittest.TestCase):
         self.assertEqual(result['evidence']['verified_evidence']['events'][0]['verified'], 1)
         self.assertTrue(result['evidence']['attributed_evidence'])
         self.assertIn('Reportado o señalado', result['answer'])
+        model_payload = json.loads(client.chat.completions.create.call_args_list[1].kwargs['messages'][2]['content'])
+        self.assertIn('verified_evidence', model_payload['evidence'])
+        self.assertIn('attributed_evidence', model_payload['evidence'])
+        self.assertIn(2103, {row['id'] for row in model_payload['evidence']['attributed_evidence']})
 
     def test_journalist_material_cannot_be_rendered_as_a_factual_finding(self):
         def response(payload):
@@ -185,6 +189,10 @@ class ApprovedImportTest(unittest.TestCase):
         evidence, _ = retrieve({'terms': ['nuevo pico'], 'before_year': None, 'before_date': None})
         row = next(item for item in evidence['attributed_evidence'] if item['id'] == 2105)
         self.assertEqual(row['url'], 'https://x.com/JSTapetillo/status/2106757575630872957')
+
+    def test_direct_date_question_keeps_date_as_a_search_target(self):
+        evidence, _ = retrieve(fallback_plan('¿Qué señaló Josué Sánchez sobre Arroyo Seco el 17 de septiembre de 2025?'))
+        self.assertIn(2101, {row['id'] for row in evidence['attributed_evidence']})
 
 
 if __name__ == '__main__':
