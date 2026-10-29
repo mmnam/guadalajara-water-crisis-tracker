@@ -19,6 +19,15 @@ streamlit run app.py
 
 Abre la dirección local que muestra Streamlit. Edita `.env` para configurar `OPENAI_API_KEY` y, opcionalmente, `OPENAI_MODEL`. Nunca publiques la clave. Sin clave funcionan todas las vistas y la recuperación local de evidencia; la síntesis del agente requiere la API. Las llamadas al modelo envían la pregunta y evidencia seleccionada al proveedor y pueden generar costos. La aplicación no escribe claves en SQLite.
 
+## Despliegue en Streamlit Community Cloud
+
+Despliega el repositorio desde la rama `main` con `app.py` como archivo principal. En un contenedor nuevo, la aplicación crea SQLite y reconstruye el corpus desde los JSON revisados y los datos de demostración incluidos en el repositorio; las ejecuciones posteriores conservan los registros existentes. Configura `OPENAI_API_KEY` en **Secrets** de Streamlit Community Cloud y, si lo deseas, `OPENAI_MODEL`. Nunca confirmes la clave en Git.
+
+```ini
+OPENAI_API_KEY = "YOUR_KEY_HERE"
+OPENAI_MODEL = "YOUR_MODEL_HERE"
+```
+
 **Los datos iniciales son completamente ficticios.** No hay hechos históricos verificados precargados, URLs inventadas ni citas reales simuladas. Activa «Mostrar datos de demostración» para explorar cinco eventos de ejemplo. El agente excluye siempre esos datos. Con la base inicial responde que no tiene evidencia suficiente: es el comportamiento esperado.
 
 ## Funcionalidad

@@ -2,13 +2,13 @@ import html
 from urllib.parse import urlparse
 import pandas as pd
 import streamlit as st
-from database.db import initialize
+from database.seed import bootstrap
 from services import records
 from agent.agent import ask
 from agent.presentation import source_label
 
 st.set_page_config(page_title='Memoria Hídrica GDL', page_icon='💧', layout='wide')
-initialize()
+bootstrap()
 st.markdown('''<style>
 .stApp {background:#f6f3ee;color:#263840}
 .block-container {max-width:1180px;padding:1.25rem 1.25rem 3.5rem}
@@ -243,7 +243,7 @@ elif page == 'Pregúntale al archivo':
     st.markdown('<div class="section-kicker">Consulta documental</div>', unsafe_allow_html=True)
     st.header('Preguntas al archivo, respuestas con evidencia')
     st.markdown('<p class="section-intro">El agente separa evidencia verificada de reportes y análisis atribuidos revisados. La segunda capa no prueba por sí sola su afirmación subyacente. La búsqueda es acotada: no demuestra por sí misma el primer aviso de toda la historia ni la ausencia de antecedentes.</p>', unsafe_allow_html=True)
-    suggestions = ['¿Quién sabía qué y cuándo?','¿Qué advertencias existían antes de 2026?','¿Qué prometió SIAPA?','Muéstrame eventos relacionados con Las Pintas.','¿Quién era responsable del tratamiento del agua?']
+    suggestions = ['¿Quién sabía qué y cuándo?','Muéstrame eventos relacionados con Las Pintas.','¿Qué se sabía sobre problemas en Arroyo Seco antes de la crisis de octubre de 2026, tanto en documentos oficiales como en análisis de especialistas?']
     selected = None
     for i,q in enumerate(suggestions):
         if st.button(q, type='primary' if i==0 else 'secondary'):
