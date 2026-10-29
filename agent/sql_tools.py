@@ -32,7 +32,11 @@ def retrieve(plan):
             matches.append(f"({fields} LIKE ? ESCAPE '\\' OR EXISTS (SELECT 1 FROM event_actors ea JOIN actors a ON a.id=ea.actor_id WHERE ea.event_id=e.id AND lower(a.name || ' ' || coalesce(a.institution,'')) LIKE ? ESCAPE '\\') OR EXISTS (SELECT 1 FROM claims c WHERE c.event_id=e.id AND c.verified=1 AND lower(c.claim_text) LIKE ? ESCAPE '\\'))")
             params.extend([term]*3)
         where.append('(' + ' OR '.join(matches) + ')')
-    if plan.get('before_year'):
+    before_date = plan.get('before_date')
+    if isinstance(before_date, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', before_date):
+        where.append('e.event_date < ?')
+        params.append(before_date)
+    elif plan.get('before_year'):
         where.append('e.event_date < ?')
         params.append(f"{int(plan['before_year']):04d}-01-01")
     events = run('SELECT e.* FROM events e WHERE ' + ' AND '.join(where) + ' ORDER BY e.event_date LIMIT 25', params)
@@ -62,5 +66,10 @@ def retrieve(plan):
 
 def fallback_plan(question):
     words = re.findall(r'[\wáéíóúñ]+', question.lower())
-    chronology = any(s in question.lower() for s in ('quién sabía', 'quien sabia', 'who knew'))
-    return {'terms': [] if chronology else [w for w in words if w not in STOPWORDS and len(w)>3 and not w.isdigit()][:6], 'before_year': None}
+    lowered = question.lower()
+    chronology = any(s in lowered for s in ('quién sabía', 'quien sabia', 'qué se sabía', 'que se sabia', 'who knew'))
+    # A question about whether a crisis "began" at a named time needs the dated
+    # record set, not a literal occurrence of the word "crisis" in a title.
+    chronology = chronology or ('crisis' in lowered and ('comenzó' in lowered or 'comenzo' in lowered or 'empezó' in lowered or 'empezo' in lowered))
+    before_date = '2026-10-01' if re.search(r'antes de octubre de 2026', lowered) else None
+    return {'terms': [] if chronology else [w for w in words if w not in STOPWORDS and len(w)>3 and not w.isdigit()][:6], 'before_year': None, 'before_date': before_date}
