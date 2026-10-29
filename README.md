@@ -24,7 +24,7 @@ Abre la dirección local que muestra Streamlit. Edita `.env` para configurar `OP
 ## Funcionalidad
 
 - Línea del tiempo con filtros por año, categoría y actor/institución; contexto, actores y fuentes por evento.
-- Chat con preguntas sugeridas, historial de sesión, consultas SQL, parámetros, evidencia recuperada y fuentes citadas.
+- Chat con preguntas sugeridas, historial de sesión, consultas SQL, parámetros, evidencia verificada y reportes/análisis atribuidos revisados, siempre etiquetados y citados por separado.
 - Comparación cronológica de declaraciones de uno o varios actores sin calificarlas de mentiras.
 - Compromisos agrupados por estado, con detalle del plazo, actor, evento y fuente.
 - Catálogo de fuentes y metodología. Los registros sin verificar se excluyen del modo normal.
@@ -58,6 +58,7 @@ flowchart LR
 | actors | Personas, instituciones, tipo, cargo, periodo y notas |
 | events | Fecha, título, descripción, categoría, ubicación y relevancia |
 | sources | Título, editor, URL original, fecha, tipo y notas de confiabilidad |
+| attributed_material | Reportaje, análisis, testimonio o post directamente revisado; conserva autor, cuenta, URL, alcance, corroboración y `evidence_tier=attributed_reviewed` |
 | event_sources | Relación muchos a muchos entre eventos y fuentes |
 | event_actors | Relación explícita entre eventos y actores, utilizada por filtros |
 | claims | Declaración atribuida a un actor, fecha, evento y fuente |
@@ -70,8 +71,8 @@ Las entidades editoriales tienen `verified` (0/1). En declaraciones, significa q
 
 1. Recibe una pregunta y pide al modelo términos de búsqueda y un año límite opcional. Si la API falla, utiliza términos locales.
 2. Construye SELECT parametrizados mediante plantillas controladas; nunca ejecuta SQL escrito por el modelo.
-3. Recupera hasta 25 eventos verificados con fuente verificada y URL, actores vinculados, hasta 50 declaraciones/compromisos/responsabilidades y sus fuentes. Incluye las relaciones evento-fuente.
-4. Entrega solo esa evidencia al modelo para una respuesta en el idioma de la pregunta, separando hechos, declaraciones, responsabilidades e interpretación.
+3. Recupera hasta 25 eventos verificados con fuente verificada y URL, actores vinculados, hasta 50 declaraciones/compromisos/responsabilidades y sus fuentes; también puede recuperar hasta 25 filas explícitamente marcadas `reviewed_attributed`.
+4. Entrega ambas capas al modelo por separado. La capa atribuida solo sustenta que su autor reportó, alegó, observó o analizó algo, nunca que la proposición subyacente quedó probada.
 5. Valida que las citas `[S1]` correspondan a los IDs recuperados y muestra las URLs originales por separado. Las respuestas con citas inválidas se descartan.
 
 El modo SQLite `ro`, `query_only` y un autorizador restringen las consultas del agente a lectura. No hay consola de SQL arbitrario. Los parámetros se muestran aparte del SQL para hacer visible la consulta real.

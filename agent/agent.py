@@ -6,6 +6,16 @@ from agent.prompts import PLANNER, ANSWER
 from agent.sql_tools import fallback_plan, retrieve
 
 
+def asks_political_context(question):
+    return bool(re.search(r'\b(partido|pol[ií]tic[oa]|administraci[oó]n|gobernaba)\b', question.lower()))
+
+
+def has_explicit_political_context(evidence):
+    records = evidence.get('attributed_evidence', []) + evidence.get('verified_evidence', {}).get('events', [])
+    text = ' '.join(' '.join(str(value) for value in record.values() if value is not None) for record in records).lower()
+    return bool(re.search(r'\b(partido|movimiento ciudadano|morena|pan|pri|prd|administraci[oó]n)\b', text))
+
+
 def ask(question):
     spanish = bool(re.search(r'[¿¡áéíóúñ]|\b(qué|quién|cuando|antes|muestra|compara|sabía|agua|responsable|prometió)\b', question.lower()))
     insufficient = ('Los registros disponibles en la base de datos no son suficientes para responder de forma confiable.' if spanish else 'The available records in the database are not sufficient to answer this reliably.')
@@ -17,14 +27,19 @@ def ask(question):
         try:
             response = client.chat.completions.create(model=model, messages=[{'role':'system','content':PLANNER},{'role':'user','content':question}], response_format={'type':'json_object'}, temperature=0)
             proposed = json.loads(response.choices[0].message.content)
-            valid_date = isinstance(proposed, dict) and (proposed.get('before_date') is None or isinstance(proposed.get('before_date'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', proposed['before_date']))
+            allows_date_cutoff = bool(re.search(r'\b(antes de|before)\b', question.lower()))
+            valid_date = isinstance(proposed, dict) and (proposed.get('before_date') is None or allows_date_cutoff and isinstance(proposed.get('before_date'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', proposed['before_date']))
             if isinstance(proposed, dict) and isinstance(proposed.get('terms'), list) and (proposed.get('before_year') is None or isinstance(proposed.get('before_year'), int) and 1 <= proposed['before_year'] <= 9999) and valid_date:
                 plan = proposed
         except (OpenAIError, ValueError, TypeError):
             result['notice'] = 'No se pudo usar el planificador; se utilizó la búsqueda local.'
     evidence, traces = retrieve(plan)
     result.update(traces=traces, evidence=evidence)
-    if not evidence['events']:
+    if asks_political_context(question) and not has_explicit_political_context(evidence):
+        result['answer'] = insufficient
+        result['notice'] = 'No hay evidencia verificada ni reporte atribuido revisado que identifique de forma explícita el partido o la administración solicitados.'
+        return result
+    if not evidence['events'] and not evidence['attributed_evidence']:
         result['answer'] = insufficient
         return result
     if not client:
@@ -38,7 +53,12 @@ def ask(question):
             + ', '.join(f'[S{source_id}]' for source_id in allowed_source_ids)
             + '. Event IDs are never citations. Every number in source_ids must exactly match a cited permitted source ID.'
         )
-        response = client.chat.completions.create(model=model, messages=[{'role':'system','content':ANSWER},{'role':'system','content':citation_contract},{'role':'user','content':json.dumps({'question':question,'evidence':evidence},ensure_ascii=False)}], response_format={'type':'json_object'}, temperature=0)
+        model_evidence = {
+            'verified_evidence': evidence['verified_evidence'],
+            'attributed_evidence': evidence['attributed_evidence'],
+            'scope': evidence['scope'],
+        }
+        response = client.chat.completions.create(model=model, messages=[{'role':'system','content':ANSWER},{'role':'system','content':citation_contract},{'role':'user','content':json.dumps({'question':question,'evidence':model_evidence},ensure_ascii=False)}], response_format={'type':'json_object'}, temperature=0)
         output = json.loads(response.choices[0].message.content)
         answer = output['answer']
         ids = output['source_ids']
@@ -70,6 +90,14 @@ def ask(question):
                 answer = re.sub(r'\[S(\d+)\]', lambda match: f"[S{mapped[int(match.group(1))]}]", answer)
                 ids = sorted(set(mapped.values()))
                 cited = set(ids)
+        if not isinstance(answer, str) or not valid_id_list:
+            raise ValueError('Invalid answer payload')
+        attributed_ids = {source['id'] for source in evidence['sources'] if source.get('evidence_tier') == 'attributed_reviewed'}
+        if cited & attributed_ids:
+            lowered_answer = answer.lower()
+            attribution = r'(report|señal|senal|aleg|afirm|observ|según|segun|an[aá]lis|testimonio|entrevist)'
+            if not re.search(attribution, lowered_answer) or re.search(r'(está comprobado|esta comprobado|queda comprobado|se comprobó|se comprobo|proven that)', lowered_answer):
+                raise ValueError('Attributed material lacks required attribution')
         if not isinstance(answer, str) or not valid_id_list or cited != set(ids) or not cited.issubset(available) or re.search(r'https?://', answer) or (not ids and answer.strip() != insufficient):
             raise ValueError('Unsupported citations or answer format')
         result['answer'] = answer

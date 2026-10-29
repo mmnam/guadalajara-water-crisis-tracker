@@ -40,8 +40,37 @@ def retrieve(plan):
         where.append('e.event_date < ?')
         params.append(f"{int(plan['before_year']):04d}-01-01")
     events = run('SELECT e.* FROM events e WHERE ' + ' AND '.join(where) + ' ORDER BY e.event_date LIMIT 25', params)
-    evidence = {'events': events, 'actors': [], 'claims': [], 'responsibilities': [], 'commitments': [], 'sources': [], 'event_sources': []}
+    attributed_where = ["am.evidence_tier='attributed_reviewed'", "am.review_status='reviewed_attributed'", "am.url IS NOT NULL", "am.url != ''"]
+    attributed_params = []
+    if terms:
+        fields = "lower(am.title || ' ' || am.author || ' ' || coalesce(am.account,'') || ' ' || coalesce(am.professional_role,'') || ' ' || am.paraphrase || ' ' || am.exact_claim)"
+        attributed_matches = []
+        for raw_term in terms:
+            term = '%' + raw_term.lower().replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_') + '%'
+            attributed_matches.append(f"{fields} LIKE ? ESCAPE '\\'")
+            attributed_params.append(term)
+        attributed_where.append('(' + ' OR '.join(attributed_matches) + ')')
+    if isinstance(before_date, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', before_date):
+        attributed_where.append('am.publication_date < ?')
+        attributed_params.append(before_date)
+    elif plan.get('before_year'):
+        attributed_where.append('am.publication_date < ?')
+        attributed_params.append(f"{int(plan['before_year']):04d}-01-01")
+    attributed = run('SELECT am.* FROM attributed_material am WHERE ' + ' AND '.join(attributed_where) + ' ORDER BY am.publication_date,am.id LIMIT 25', attributed_params)
+    attributed_sources = [{
+        'id': material['id'], 'title': material['title'], 'publisher': material['publisher'],
+        'url': material['url'], 'publication_date': material['publication_date'],
+        'source_type': material['source_type'], 'reliability_notes': material['review_notes'],
+        'evidence_tier': 'attributed_reviewed', 'review_status': material['review_status'],
+    } for material in attributed]
+    evidence = {
+        'events': events, 'actors': [], 'claims': [], 'responsibilities': [], 'commitments': [],
+        'sources': [], 'event_sources': [], 'attributed_evidence': attributed,
+    }
     if not events:
+        evidence['sources'] = attributed_sources
+        evidence['verified_evidence'] = {'events': [], 'actors': [], 'claims': [], 'responsibilities': [], 'commitments': [], 'sources': [], 'event_sources': []}
+        evidence['scope'] = 'At most 25 verified events and 25 explicitly reviewed attributed materials. Attributed material supports only what its author or source reported, observed, alleged, or analyzed.'
         return evidence, traces
     ids = [e['id'] for e in events]
     marks = ','.join('?' for _ in ids)
@@ -60,7 +89,13 @@ def retrieve(plan):
     source_ids.update(s['id'] for s in event_sources)
     if source_ids:
         evidence['sources'] = run('SELECT * FROM sources WHERE id IN (' + ','.join('?' for _ in source_ids) + ')', list(source_ids))
-    evidence['scope'] = 'At most 25 matching events, 50 records per related entity. Not an exhaustive historical search. Dates delimit events; responsibility terms must be checked separately.'
+    evidence['verified_evidence'] = {
+        'events': evidence['events'], 'actors': evidence['actors'], 'claims': evidence['claims'],
+        'responsibilities': evidence['responsibilities'], 'commitments': evidence['commitments'],
+        'sources': list(evidence['sources']), 'event_sources': evidence['event_sources'],
+    }
+    evidence['sources'].extend(attributed_sources)
+    evidence['scope'] = 'At most 25 verified events, 50 records per related verified entity, and 25 explicitly reviewed attributed materials. Attributed material supports only what its author or source reported, observed, alleged, or analyzed; it is not a factual finding of the underlying proposition.'
     return evidence, traces
 
 
