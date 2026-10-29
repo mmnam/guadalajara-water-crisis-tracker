@@ -348,9 +348,12 @@ class ApprovedImportTest(unittest.TestCase):
                 'limitations': [],
             }),
         ]
-        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key', 'OPENAI_MODEL': 'gpt-6-luna'}), patch('agent.agent.OpenAI', return_value=client):
             result = ask('¿Qué observó el periodista en El Nixticuil?')
         self.assertEqual(client.chat.completions.create.call_count, 3)
+        for call in client.chat.completions.create.call_args_list:
+            self.assertEqual(call.kwargs['model'], 'gpt-6-luna')
+            self.assertNotIn('temperature', call.kwargs)
         self.assertFalse(result['presentation'].get('fallback'))
         self.assertEqual([source['id'] for source in result['sources']], [2102])
         self.assertEqual(result['presentation']['source_ids'], [2102])

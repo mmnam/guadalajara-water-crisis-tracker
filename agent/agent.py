@@ -185,7 +185,6 @@ def _repair_presentation(client, model, raw_output, errors, diagnostics):
             {'role': 'user', 'content': json.dumps(repair_contract, ensure_ascii=False)},
         ],
         response_format={'type': 'json_object'},
-        temperature=0,
     )
     content = response.choices[0].message.content
     return json.loads(content), content
@@ -218,7 +217,6 @@ def ask(question):
                 model=model,
                 messages=[{'role': 'system', 'content': PLANNER}, {'role': 'user', 'content': question}],
                 response_format={'type': 'json_object'},
-                temperature=0,
             )
             proposed = json.loads(response.choices[0].message.content)
             allows_date_cutoff = bool(re.search(r'\b(antes de|before)\b', question.lower()))
@@ -287,7 +285,6 @@ def ask(question):
                 {'role': 'user', 'content': json.dumps({'question': question, 'evidence': model_evidence}, ensure_ascii=False)},
             ],
             response_format={'type': 'json_object'},
-            temperature=0,
         )
         raw_content = response.choices[0].message.content
         output = json.loads(raw_content)
