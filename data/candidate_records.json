@@ -1,0 +1,2647 @@
+{
+  "metadata": {
+    "title": "Memoria Hídrica GDL · corpus candidato",
+    "research_cutoff": "2026-10-28",
+    "status": "needs_review",
+    "verified": 0,
+    "warning": "Investigación preliminar: no importar ni publicar hasta aprobación expresa. Las fuentes institucionales pueden reproducir declaraciones de terceros; cada atribución conserva su alcance.",
+    "schema_notes": "IDs propios >=1000; review, author, precision, source_kind, locators y otros campos no son columnas SQLite. Ver REVIEW_GUIDE.md antes de una futura importación."
+  },
+  "actors": [
+    {
+      "id": 1001,
+      "name": "Sistema Intermunicipal de los Servicios de Agua Potable y Alcantarillado (SIAPA)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Organismo; no inferir conocimiento personal.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1002,
+      "name": "Comisión Estatal de Derechos Humanos Jalisco (CEDHJ)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Comisión estatal de derechos humanos.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1003,
+      "name": "Comisión Estatal del Agua de Jalisco (CEA)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Organismo estatal.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1004,
+      "name": "Gobierno de Jalisco",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Poder ejecutivo estatal; distinguir administraciones.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1005,
+      "name": "Pablo Lemus Navarro",
+      "actor_type": "person",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Gobernador en los hechos de 2026; sin inferir conocimiento anterior.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1006,
+      "name": "Ayuntamiento de Tlajomulco de Zúñiga",
+      "actor_type": "municipality",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Sus oficios son declaraciones municipales, no hechos probados automáticamente.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1007,
+      "name": "Vecinas y vecinos de Las Pintas",
+      "actor_type": "civil_society",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Colectivo genérico; información personal protegida.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1008,
+      "name": "Trabajadoras y trabajadores entrevistados del SIAPA",
+      "actor_type": "other",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Testimonios anónimos reportados por ZonaDocs; no atribuir a todo el personal.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1009,
+      "name": "Instituto Mexicano para el Desarrollo Comunitario (IMDEC)",
+      "actor_type": "civil_society",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Organización promotora de monitoreo ciudadano.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1010,
+      "name": "Universidad de Guadalajara (UdeG)",
+      "actor_type": "other",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Institución académica pública.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1011,
+      "name": "Comisión Nacional del Agua (CONAGUA)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Autoridad federal del agua.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1012,
+      "name": "Gobierno federal de México",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Gobierno federal; actor institucional.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1013,
+      "name": "Organizaciones de la campaña #SiapaCorrupto",
+      "actor_type": "civil_society",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Organizaciones citadas en el reportaje; no es el periodista.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1014,
+      "name": "Ayuntamiento de San Pedro Tlaquepaque",
+      "actor_type": "municipality",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Municipio mencionado en expedientes CEDHJ.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1015,
+      "name": "Personas que protestaron por agua limpia",
+      "actor_type": "civil_society",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Descripción colectiva, no identifica a todos los asistentes.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1016,
+      "name": "Congreso del Estado de Jalisco",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Legislatura estatal.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1017,
+      "name": "Comisión para la Protección contra Riesgos Sanitarios de Jalisco (COPRISJAL)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Autoridad sanitaria estatal.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1018,
+      "name": "Vecinas y vecinos de Arroyo Seco",
+      "actor_type": "civil_society",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Quejas en 2025; identidad no necesaria para el registro.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1019,
+      "name": "Secretaría de Gestión Integral del Agua de Jalisco (SEGIA)",
+      "actor_type": "government_agency",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Secretaría estatal mencionada en recomendaciones.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1020,
+      "name": "Especialistas de la Universidad de Guadalajara",
+      "actor_type": "other",
+      "institution": null,
+      "role": null,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Personas investigadoras que ofrecieron declaraciones públicas.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Identidad y papel deben cotejarse con fuentes.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": 1101,
+      "title": "Recomendación 10/2022",
+      "publisher": "CEDHJ",
+      "url": "https://historico.cedhj.org.mx/recomendaciones/emitidas/2022/Reco%2010-2022%20VP.pdf",
+      "publication_date": "2022-02-14",
+      "source_type": "human_rights_report",
+      "author": "CEDHJ",
+      "reliability_notes": "Documento primario retrospectivo: reproduce quejas y oficios y expone conclusiones de la comisión; no prueba que cada alegato sea cierto ni qué sabía cada persona.",
+      "source_kind": "primary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1102,
+      "title": "Recomendación 10/2026",
+      "publisher": "CEDHJ",
+      "url": "https://cedhj.org.mx/assets_web/doc/recomendaciones/emitidas/2026/20260430150739/recomendacion_1777583259457.pdf",
+      "publication_date": "2026-04-30",
+      "source_type": "human_rights_report",
+      "author": "CEDHJ",
+      "reliability_notes": "Documento primario retrospectivo de 191 páginas. Reproduce informes y denuncias que deben atribuirse a sus autores; versión municipal y SIAPA discrepan.",
+      "source_kind": "primary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1103,
+      "title": "Ley que crea el SIAPA, versión del Congreso",
+      "publisher": "Congreso del Estado de Jalisco",
+      "url": "https://congresoweb.congresojal.gob.mx/bibliotecavirtual/legislacion/Leyes/Documentos_PDF-Leyes/Ley%20que%20Crea%20el%20Organismo%20P%C3%BAblico%20Descentralizado%20del%20Poder%20Ejecutivo%20denominado%20Sistema%20Intermunicipal%20de%20los%20Servicios%20de%20Agua%20Potable%20y%20Alcantarillado.%20-310323.pdf",
+      "publication_date": null,
+      "source_type": "legal_document",
+      "author": "Congreso del Estado de Jalisco",
+      "reliability_notes": "Texto institucional con reformas hasta la versión publicada en la biblioteca; arts. 1–2 delimitan el objeto y convenios municipales. Comprobar reformas posteriores y vigencia en cada fecha.",
+      "source_kind": "primary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1104,
+      "title": "#SiapaCorrupto: colectivos ciudadanos unen fuerzas contra la corrupción en el manejo del agua en Guadalajara",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2023/08/15/siapacorrupto-colectivos-ciudadanos-unen-fuerzas-contra-la-corrupcion-en-el-manejo-del-agua-en-guadalajara/",
+      "publication_date": "2023-08-15",
+      "source_type": "news",
+      "author": "Mario Marlo",
+      "reliability_notes": "Reportaje de lanzamiento y denuncias de colectivos; sus acusaciones no son una resolución judicial.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1105,
+      "title": "¿Qué ha pasado con la recomendación sobre calidad de agua en Guadalajara?",
+      "publisher": "El Informador",
+      "url": "https://www.informador.mx/jalisco/Que-ha-pasado-con-la-recomendacion-sobre-calidad-de-agua-en-Guadalajara-20230921-0069.html",
+      "publication_date": "2023-09-21",
+      "source_type": "news",
+      "author": "Ilse Martínez",
+      "reliability_notes": "Reporta seguimiento atribuido a funcionario de CEDHJ y testimonio de vecina; aceptación parcial no demuestra cumplimiento. La recomendación original se registra por separado.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1106,
+      "title": "Organizaciones en Jalisco denuncian la crisis hídrica en el estado y critican las políticas gubernamentales",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2024/03/14/organizaciones-en-jalisco-denuncian-la-crisis-hidrica-en-el-estado-y-critican-las-politicas-gubernamentales/",
+      "publication_date": "2024-03-14",
+      "source_type": "news",
+      "author": "Mario Marlo",
+      "reliability_notes": "Registra pronunciamiento de organizaciones sobre ríos y servicio; sus interpretaciones no se convierten en hechos comprobados.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1107,
+      "title": "#ElSiapaQueQueremos: exigen colectivos gestión del agua justa y sin corrupción",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2025/03/25/elsiapaquequeremos-exigen-colectivos-gestion-del-agua-justa-y-sin-corrupcion/",
+      "publication_date": "2025-03-25",
+      "source_type": "news",
+      "author": "Mario Marlo",
+      "reliability_notes": "Recoge comunicado de campaña y cifras atribuidas a colectivos. El comunicado y datos primarios deben localizarse; no prueba por sí solo las cifras ni sus causas.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1108,
+      "title": "Olores ofensivos, la realidad cotidiana en El Salto, Juanacatlán y Las Pintas",
+      "publisher": "Gaceta UDG",
+      "url": "https://www.gaceta.udg.mx/olores-ofensivos-la-realidad-cotidiana-en-el-salto-juanacatlan-y-las-pintas/",
+      "publication_date": "2026-01-28",
+      "source_type": "news",
+      "author": "Gaceta UDG",
+      "reliability_notes": "Comunicación universitaria sobre estudio exploratorio de olores en aire, no análisis de agua potable ni estudio causal de daños. El PDF del estudio enlazado no pudo descargarse por tamaño.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1109,
+      "title": "Trabajadores del SIAPA denuncian descargas contaminantes, falta de equipo y deterioro del sistema de agua en Guadalajara",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2026/03/13/trabajadores-del-siapa-denuncian-descargas-contaminantes-falta-de-equipo-y-deterioro-del-sistema-de-agua-en-guadalajara/",
+      "publication_date": "2026-03-13",
+      "source_type": "interview",
+      "author": "Mario Marlo",
+      "reliability_notes": "Entrevista reportada con personal no identificado; el artículo dice que la entrevista fue para Somoselmedio, pero enlaza solo su página principal. Testimonios y su presunta comunicación previa no están corroborados independientemente.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1110,
+      "title": "Expertos de UdeG proponen mesa técnica sobre calidad del agua",
+      "publisher": "Gaceta UDG",
+      "url": "https://www.gaceta.udg.mx/mesa-tecnica-calidad-agua/",
+      "publication_date": "2026-03-18",
+      "source_type": "news",
+      "author": "Gaceta UDG",
+      "reliability_notes": "Comunicación universitaria que recoge advertencias y propuestas de expertos; sus explicaciones técnicas y observaciones no generalizan resultados a toda la red.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1111,
+      "title": "En protesta anuncian Red de Monitores del Agua Vecinales, además de exigir alerta sanitaria y destitución del Director de SIAPA",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2026/03/23/protesta-por-el-agua-en-guadalajara-anuncian-red-de-monitores-del-agua-vecinales-y-exigen-alerta-sanitaria-y-destitucion-del-director-de-siapa/",
+      "publication_date": "2026-03-23",
+      "source_type": "news",
+      "author": null,
+      "reliability_notes": "La búsqueda mostró extracto de nota sobre protesta del 22 de marzo, pero la página completa devolvió error 500; autor y contexto pendientes de comprobación.",
+      "source_kind": "secondary",
+      "access": "snippet_only",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Acceso parcial: contrastar el texto completo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1112,
+      "title": "Mercurio, aluminio y sin cloro: el agua del SIAPA reprueba el primer monitoreo ciudadano en el AMG",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2026/04/20/mercurio-aluminio-y-sin-cloro-el-agua-del-siapa-reprueba-el-primer-monitoreo-ciudadano-en-el-amg/",
+      "publication_date": "2026-04-20",
+      "source_type": "news",
+      "author": "Mario Marlo",
+      "reliability_notes": "Narra taller del 19 de abril y resultados de muestras aportadas por vecinos; tiras reactivas y muestra no aleatoria no acreditan potabilidad ni prevalencia metropolitana.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1113,
+      "title": "Monitoreo ciudadano revela agua contaminada con plomo, fluoruros y sin cloro en 42 puntos de la ZMG",
+      "publisher": "IMDEC / Agua",
+      "url": "https://www.imdecdhagua.org/monitoreo-ciudadano-revela-agua-contaminada-con-plomo-fluoruros-y-sin-cloro-en-42-puntos-de-la-zmg/",
+      "publication_date": null,
+      "source_type": "NGO",
+      "author": "IMDEC",
+      "reliability_notes": "Página enlazada desde ZonaDocs contiene texto de informe ampliado presentado el 29 de junio. Resultado de búsqueda mostró metodología y cifras; visita completa agotó tiempo. Es relato del promotor, no el informe de laboratorio completo.",
+      "source_kind": "primary",
+      "access": "snippet_only",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Acceso parcial: contrastar el texto completo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1114,
+      "title": "El agua limpia que no llega y los metales que sí: 184 muestras ciudadanas desnudan la crisis hídrica de la ZMG",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2026/07/02/el-agua-limpia-que-no-llega-y-los-metales-que-si-184-muestras-ciudadanas-desnudan-la-crisis-hidrica-de-la-zmg/",
+      "publication_date": "2026-07-02",
+      "source_type": "investigation",
+      "author": "Mario Marlo",
+      "reliability_notes": "Reporta el mismo monitoreo de IMDEC enlazado, no es una segunda medición independiente; el muestreo ciudadano no representa necesariamente toda la red y requiere revisar métodos y laboratorios.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1116,
+      "title": "Cierran entrada de agua de Las Pintas; líquido deberá mejorar en 3 días",
+      "publisher": "Quadratín Jalisco",
+      "url": "https://jalisco.quadratin.com.mx/principal/cierran-entrada-de-agua-de-las-pintas-liquido-debera-mejorar-en-3-dias/",
+      "publication_date": "2026-10-07",
+      "source_type": "news",
+      "author": "Haremy Reyes",
+      "reliability_notes": "Entrevista a gobernador reporta cierre el día anterior y su explicación basada en lluvias; la causa y el pronóstico de 72 horas son afirmaciones atribuidas.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1117,
+      "title": "Un acueducto sustituto y una inversión de 12.000 millones de pesos: a prueba la solución al problema del agua en Jalisco",
+      "publisher": "El País",
+      "url": "https://elpais.com/mexico/2026-10-16/un-acueducto-sustituto-y-una-inversion-de-12000-millones-de-pesos-a-prueba-la-solucion-al-problema-del-agua-en-jalisco.html",
+      "publication_date": "2026-10-16",
+      "source_type": "news",
+      "author": "Erika Rosete y Patricia San Juan Flores",
+      "reliability_notes": "Reporta cierre y proyecto a partir de versiones oficiales y voces de sociedad civil; no constituye prueba independiente de calidad del agua o de la causa del cierre.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1118,
+      "title": "¿Esa agua quieres para nosotros, Lemus?",
+      "publisher": "ZonaDocs",
+      "url": "https://www.zonadocs.mx/2026/10/11/esa-agua-quieres-para-nosotros-lemus/",
+      "publication_date": "2026-10-11",
+      "source_type": "news",
+      "author": "Karen Garcia",
+      "reliability_notes": "Crónica de movilización y testimonios; cifras oficiales de asistencia son estimaciones. Cualquier caracterización de detenciones necesita su propia fuente.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1119,
+      "title": "Miles de vecinos se manifiestan contra el agua sucia en Guadalajara",
+      "publisher": "El País",
+      "url": "https://elpais.com/mexico/2026-10-11/miles-de-vecinos-se-manifiestan-contra-el-agua-sucia-en-guadalajara.html",
+      "publication_date": "2026-10-11",
+      "source_type": "news",
+      "author": "Pablo Ferri y Patricia San Juan Flores",
+      "reliability_notes": "Cobertura periodística separada de la marcha. Confirma movilización pero no valida por sí sola estimaciones de asistencia o cada denuncia.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1120,
+      "title": "El racionamiento de agua en Guadalajara deja sin servicio a miles de hogares",
+      "publisher": "El País",
+      "url": "https://elpais.com/mexico/2026-10-22/el-racionamiento-de-agua-en-guadalajara-deja-sin-servicio-a-miles-de-hogares.html",
+      "publication_date": "2026-10-22",
+      "source_type": "news",
+      "author": "Erika Rosete",
+      "reliability_notes": "Reporta inicio del esquema el 15 de octubre y testimonios posteriores. Atribuir estimaciones y promesas al actor citado; falta reglamento original del programa.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1121,
+      "title": "CEA admite responsabilidad en contaminación de Las Pintas; detectan 150 descargas irregulares",
+      "publisher": "Semanario Conciencia Pública",
+      "url": "https://concienciapublica.com.mx/2026/10/27/cea-admite-responsabilidad-en-contaminacion-de-las-pintas-detectan-150-descargas-irregulares/",
+      "publication_date": "2026-10-27",
+      "source_type": "news",
+      "author": "Redacción Conciencia Pública",
+      "reliability_notes": "Resume declaraciones del director de CEA sobre colectores y descargas; no se tiene oficio, inventario de campo ni fecha original exacta de la declaración.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1122,
+      "title": "Dos nuevos acueductos y una inversión conjunta de 25.000 millones de pesos: Jalisco y la Federación presentan su plan para Guadalajara",
+      "publisher": "El País",
+      "url": "https://elpais.com/mexico/2026-10-28/dos-nuevos-acueductos-y-una-inversion-conjunta-de-25000-millones-de-pesos-jalisco-y-la-federacion-presentan-su-plan-para-guadalajara.html",
+      "publication_date": "2026-10-28",
+      "source_type": "news",
+      "author": "Erika Rosete",
+      "reliability_notes": "Noticia de anuncios federales y estatales; montos, cronograma y declaraciones no acreditan ejecución. Localizar anuncio y documentos presupuestales originales.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1123,
+      "title": "Plataforma de Organismos de Cuenca y Direcciones Locales: cuerpos nacionales",
+      "publisher": "CONAGUA",
+      "url": "https://app.conagua.gob.mx/podan/",
+      "publication_date": null,
+      "source_type": "official_statement",
+      "author": "CONAGUA",
+      "reliability_notes": "Página institucional sobre custodia de cuerpos de agua nacionales y marco general. No resuelve por sí sola la competencia exacta sobre cada descarga o tramo.",
+      "source_kind": "primary",
+      "access": "snippet_only",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Acceso parcial: contrastar el texto completo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1124,
+      "title": "Agua potable contaminada y de mala calidad en AMG, advierten especialistas",
+      "publisher": "Universidad de Guadalajara",
+      "url": "https://ww1.udg.mx/es/noticia/agua-potable-contaminada-y-de-mala-calidad-en-amg-advierten-especialistas",
+      "publication_date": "2020-10-15",
+      "source_type": "official_statement",
+      "author": "Martha Eva Loera",
+      "reliability_notes": "Comunicado universitario consultado mediante índice; la página original devolvió 502. Registra advertencia y necesidad de investigación, no demuestra causa o prevalencia.",
+      "source_kind": "primary",
+      "access": "snippet_only",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Acceso parcial: contrastar el texto completo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1125,
+      "title": "Confirman 39 detenidos en marcha por el agua, mientras universidades critican uso de la fuerza",
+      "publisher": "UnoTV",
+      "url": "https://www.unotv.com/estados/jalisco/confirman-39-detenidos-en-marcha-por-el-agua-mientras-universidades-critican-uso-de-la-fuerza/",
+      "publication_date": "2026-10-11",
+      "source_type": "news",
+      "author": "F. López",
+      "reliability_notes": "Cobertura adicional de la marcha; informa una cifra que difiere de otra reportada por organizaciones. Revisar horas de corte y fuentes antes de compararlas.",
+      "source_kind": "secondary",
+      "access": "read",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Comprobar URL, fecha y alcance de la fuente.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1126,
+      "title": "Olores ofensivos en El Salto, Juanacatlán y Las Pintas, Jalisco",
+      "publisher": "Universidad de Guadalajara y colaboradores",
+      "url": "https://www.seguirenlatierra.org/wp-content/uploads/2025/11/Estudio-exploratorio-olores-ofensivos_ISBN.pdf",
+      "publication_date": null,
+      "source_type": "academic",
+      "author": null,
+      "reliability_notes": "Enlace directo al estudio facilitado por Gaceta UDG; archivo demasiado grande para la herramienta. No revisado: descargar y verificar autores, fecha, métodos y conclusiones.",
+      "source_kind": "primary",
+      "access": "link_only",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Acceso parcial: contrastar el texto completo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": 1201,
+      "event_date": "2020-08-22",
+      "date_precision": "day",
+      "title": "Queja por agua recibida en CEDHJ",
+      "description": "La CEDHJ registró una queja ciudadana contra personal de SIAPA por las condiciones del agua recibida en domicilio.",
+      "category": "public_complaint",
+      "location": "Guadalajara y zona metropolitana",
+      "significance": "Sitúa una queja sobre calidad ante CEDHJ seis años antes de octubre de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2022, antecedentes, p. 6, narra recepción de queja 6072/2020-I.",
+        "notes": "Leer el expediente antes de inferir causa o frecuencia; no atribuir conocimiento a una persona.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint",
+        "institution_informed"
+      ]
+    },
+    {
+      "id": 1202,
+      "event_date": "2020-08-25",
+      "date_precision": "day",
+      "title": "SIAPA responde a medidas cautelares de la CEDHJ",
+      "description": "La CEDHJ registró un oficio de personal directivo del SIAPA que aceptaba medidas cautelares e informaba atención a reportes de agua turbia.",
+      "category": "institutional_warning",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Conecta reportes previos con una respuesta institucional documentada.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2022 p. 7, oficio DAO/219/2020.",
+        "notes": "La recepción por CEDHJ no demuestra cumplimiento ni conocimiento individual del gobernador.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "institution_informed",
+        "official_acknowledgement"
+      ]
+    },
+    {
+      "id": 1203,
+      "event_date": "2020-10-15",
+      "date_precision": "day",
+      "title": "Advertencia universitaria sobre calidad del agua",
+      "description": "La UdeG difundió advertencias de especialistas y la necesidad de realizar estudios adicionales sobre la calidad del agua.",
+      "category": "institutional_warning",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Muestra preocupación académica anterior a la crisis de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "El índice del comunicado universitario muestra fecha, autor y declaraciones.",
+        "notes": "Página original devolvió 502; contrastar el comunicado completo y datos de muestreo.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "scientific_warning"
+      ]
+    },
+    {
+      "id": 1204,
+      "event_date": "2022-02-14",
+      "date_precision": "day",
+      "title": "CEDHJ emite Recomendación 10/2022",
+      "description": "La CEDHJ emitió una recomendación sobre quejas acumuladas por problemas de agua y suministro, dirigida a distintas autoridades.",
+      "category": "recommendation",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Documenta un antecedente institucional sobre calidad y suministro en la administración anterior.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Documento original fechado y cobertura posterior de seguimiento.",
+        "notes": "La nota de 2023 se basa en la misma recomendación; no es una nueva prueba de sus resultados.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "human_rights_recommendation"
+      ]
+    },
+    {
+      "id": 1205,
+      "event_date": "2022-06-20",
+      "date_precision": "day",
+      "title": "Vecina presenta queja sobre la presa Las Pintas",
+      "description": "La CEDHJ recibió una queja de una vecina de Las Pintas que alegó contaminación y problemas de manejo en la presa.",
+      "category": "public_complaint",
+      "location": "Presa Las Pintas",
+      "significance": "Sitúa la preocupación por Las Pintas en un expediente institucional cuatro años antes de octubre de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026, expediente 3583/2022/IV, p. 6.",
+        "notes": "Es una denuncia, no prueba independiente de todas sus alegaciones ni de la causa del agua suministrada.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint",
+        "institution_informed"
+      ]
+    },
+    {
+      "id": 1206,
+      "event_date": "2023-08-04",
+      "date_precision": "day",
+      "title": "SIAPA informa sobre limpieza del sistema Chapala-Santiago",
+      "description": "Según la CEDHJ, un oficio del SIAPA describió limpieza y desazolve, con apoyo de CEA, en el sistema que incluye Las Pintas.",
+      "category": "government_action",
+      "location": "Presa Las Pintas",
+      "significance": "Muestra cómo el organismo describía su mantenimiento antes de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 15 reproduce oficio DJ/0120/2023 y memorándum SA/1446/2023.",
+        "notes": "Es lo informado por SIAPA; no acredita que los trabajos bastaran ni sus resultados.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement",
+        "infrastructure_diagnosis"
+      ]
+    },
+    {
+      "id": 1207,
+      "event_date": "2023-08-15",
+      "date_precision": "day",
+      "title": "Colectivos presentan campaña #SiapaCorrupto",
+      "description": "ZonaDocs reportó el lanzamiento de una campaña ciudadana que denunció deficiencias del servicio y solicitó cambios en la gestión.",
+      "category": "public_complaint",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Expone una organización pública de reclamos antes de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Reportaje con fecha y firma identifica lanzamiento y demandas.",
+        "notes": "Buscar comunicado original; las acusaciones son del colectivo y no resoluciones.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1208,
+      "event_date": "2023-09-21",
+      "date_precision": "day",
+      "title": "Seguimiento reportado de la Recomendación 10/2022",
+      "description": "El Informador reportó que un funcionario de seguimiento de la CEDHJ había dicho que SIAPA aceptó seis de once puntos dirigidos al organismo.",
+      "category": "government_action",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Distingue emisión de recomendaciones, aceptación y cumplimiento posterior.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "La nota de Ilse Martínez atribuye la cifra al director de seguimiento de CEDHJ.",
+        "notes": "La declaración citada ocurrió en agosto sin día exacto; la fecha de evento es la publicación. Buscar informe de seguimiento de CEDHJ.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement"
+      ]
+    },
+    {
+      "id": 1209,
+      "event_date": "2024-03-14",
+      "date_precision": "day",
+      "title": "Organizaciones cuestionan políticas hídricas y tandeos",
+      "description": "ZonaDocs difundió un pronunciamiento de organizaciones que cuestionaron la gestión hídrica, los tandeos y soluciones basadas en infraestructura.",
+      "category": "political_statement",
+      "location": "Jalisco",
+      "significance": "Recoge una perspectiva ciudadana de la administración anterior sin adoptar sus conclusiones.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Nota identificada con fecha y autor recoge postura de organizaciones.",
+        "notes": "Localizar comunicado conjunto y distinguir fecha de pronunciamiento de fecha de publicación.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1210,
+      "event_date": "2025-03-25",
+      "date_precision": "day",
+      "title": "Campaña ciudadana expone quejas y fugas",
+      "description": "Según ZonaDocs, la campaña #ElSiapaQueQueremos difundió denuncias sobre la calidad del agua, fugas y la gestión del servicio.",
+      "category": "public_complaint",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Sitúa quejas organizadas sobre la calidad antes de las protestas de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Reportaje identifica comunicado y relata denuncias.",
+        "notes": "No se localizó comunicado ni base primaria de conteos; no generalizar cifras.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1211,
+      "event_date": "2025-09-18",
+      "date_precision": "day",
+      "title": "CEDHJ recibe queja sobre Arroyo Seco",
+      "description": "La CEDHJ registró una queja de vecinos que alegaron afectaciones por crecidas y presuntas descargas residuales en Arroyo Seco.",
+      "category": "public_complaint",
+      "location": "Arroyo Seco, Tlaquepaque",
+      "significance": "Añade un antecedente de denuncias ambientales cerca del sistema antes de 2026.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 57, expediente 2362/2025/IV.",
+        "notes": "Los posibles vertidos son alegatos de quejosos; no se establece contaminación del agua de grifo.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint",
+        "institution_informed"
+      ]
+    },
+    {
+      "id": 1212,
+      "event_date": "2026-01-14",
+      "date_precision": "day",
+      "title": "Queja colectiva por agua e infraestructura en La Duraznera",
+      "description": "La CEDHJ recibió una queja colectiva relativa al suministro de agua de dudosa calidad y a problemas de infraestructura.",
+      "category": "public_complaint",
+      "location": "La Duraznera, Tlaquepaque",
+      "significance": "Registra denuncias en 2026 antes del debate de octubre.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 71, expediente 89/2026/IV.",
+        "notes": "La queja no verifica por sí sola los hechos ni su causa; el requerimiento a SIAPA fue posterior.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint",
+        "institution_informed"
+      ]
+    },
+    {
+      "id": 1213,
+      "event_date": "2026-01-28",
+      "date_precision": "day",
+      "title": "Se presenta estudio exploratorio de olores en Las Pintas",
+      "description": "La Gaceta UDG informó de la presentación de un estudio comunitario y universitario sobre olores en Las Pintas y otros puntos.",
+      "category": "investigation",
+      "location": "Las Pintas, El Salto y Juanacatlán",
+      "significance": "Documenta investigación ambiental previa a octubre, sin confundir aire con agua potable.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Gaceta describe la presentación y enlaza al estudio original.",
+        "notes": "PDF enlazado excedió límite de lectura; revisar metodología antes de usar cualquier resultado.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "scientific_warning"
+      ]
+    },
+    {
+      "id": 1214,
+      "event_date": "2026-03-13",
+      "date_precision": "day",
+      "title": "Personal entrevistado denuncia descargas y falta de equipo",
+      "description": "ZonaDocs publicó testimonios de personal del SIAPA que relató presuntas descargas, deterioro, falta de equipo y avisos previos dentro del organismo.",
+      "category": "institutional_warning",
+      "location": "Canales hacia Las Pintas",
+      "significance": "Registra advertencias laborales publicadas antes de octubre, sin presumir quién recibió cada aviso.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Nota identifica al autor y presenta testimonios de trabajadores sin nombrarlos.",
+        "notes": "No se localizaron oficios ni entrevista original específica; los avisos internos y la causalidad requieren corroboración.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "worker_warning",
+        "reported_knowledge"
+      ]
+    },
+    {
+      "id": 1215,
+      "event_date": "2026-03-18",
+      "date_precision": "day",
+      "title": "Especialistas UdeG piden mesa técnica",
+      "description": "Expertos universitarios propusieron una mesa técnica ciudadana y medidas ante los reportes de mala calidad del agua.",
+      "category": "institutional_warning",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Hay advertencias académicas públicas meses antes de octubre.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Gaceta UDG identifica fecha, especialistas y propuesta.",
+        "notes": "Las explicaciones sobre causas son opiniones de los expertos; revisar estudios específicos.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "scientific_warning"
+      ]
+    },
+    {
+      "id": 1216,
+      "event_date": "2026-03-22",
+      "date_precision": "day",
+      "title": "Protesta y anuncio de red vecinal de monitoreo",
+      "description": "ZonaDocs reportó que manifestantes pidieron medidas sanitarias y anunciaron una red de monitoreo vecinal del agua.",
+      "category": "protest",
+      "location": "Guadalajara",
+      "significance": "Muestra organización ciudadana y reclamos anteriores a octubre.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Extracto de ZonaDocs y nota posterior de abril registran la protesta del 22 de marzo.",
+        "notes": "Primera página devuelve 500; recuperar autor y texto completo. La segunda fuente es retrospectiva y no independiente para cada detalle.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1217,
+      "event_date": "2026-04-15",
+      "date_precision": "day",
+      "title": "SIAPA expone una explicación ante la CEDHJ",
+      "description": "Según la recomendación 10/2026, SIAPA informó que descargas atribuidas a Tlajomulco afectaban el agua cruda y que la planta no estaba diseñada para ese influente.",
+      "category": "official_statement",
+      "location": "Canal Las Pintas y planta potabilizadora",
+      "significance": "Conserva una explicación institucional previa a octubre y una limitación de tratamiento afirmada por SIAPA.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 p. 74 reproduce oficio DJ/099/2026 recibido el 15 de abril.",
+        "notes": "No establece por sí solo el origen ni la distribución de responsabilidades; ver también la respuesta municipal.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement",
+        "treatment_issue",
+        "institution_informed"
+      ]
+    },
+    {
+      "id": 1218,
+      "event_date": "2026-04-15",
+      "date_precision": "day",
+      "title": "Tlajomulco comunica una versión distinta sobre puntos de descarga",
+      "description": "En otro oficio recibido el 15 de abril y reproducido por la CEDHJ, Tlajomulco afirmó no haber constatado diez puntos señalados y describió observaciones en Arroyo Seco.",
+      "category": "official_statement",
+      "location": "Canal Las Pintas y Arroyo Seco",
+      "significance": "Conserva otra versión institucional para revisar discrepancias sin resolverlas automáticamente.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Recomendación 10/2026 pp. 52–53 reproduce oficio municipal DAPIH/0331-01/2026.",
+        "notes": "La versión municipal es una afirmación; cotejar inspecciones, coordenadas y oficios originales.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement",
+        "infrastructure_diagnosis"
+      ]
+    },
+    {
+      "id": 1220,
+      "event_date": "2026-04-30",
+      "date_precision": "day",
+      "title": "CEDHJ emite Recomendación 10/2026",
+      "description": "La CEDHJ emitió una recomendación que acumula expedientes de 2022, 2025 y 2026 y documenta actuaciones sobre Las Pintas y agua suministrada.",
+      "category": "recommendation",
+      "location": "Las Pintas y Área Metropolitana de Guadalajara",
+      "significance": "Reúne antecedentes anteriores a octubre y posiciones de varias instituciones en un documento primario.",
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Documento original, portada y antecedentes.",
+        "notes": "Revisar cada conclusión y destinatario; no asumir que todo expediente trata el mismo fenómeno.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "human_rights_recommendation"
+      ]
+    },
+    {
+      "id": 1221,
+      "event_date": "2026-06-29",
+      "date_precision": "day",
+      "title": "IMDEC presenta monitoreo ciudadano ampliado",
+      "description": "IMDEC informó de un monitoreo ciudadano de 184 muestras de 90 colonias presentado el 29 de junio; ZonaDocs reportó el mismo estudio.",
+      "category": "investigation",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Recoge evidencia ciudadana anterior a octubre sin extrapolar muestras seleccionadas.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "IMDEC identifica fecha de presentación; ZonaDocs describe instrumentos y resultados del mismo corpus.",
+        "notes": "Acceso directo a IMDEC solo por extracto; localizar informe íntegro, protocolo, resultados de laboratorio y evaluar representatividad.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "scientific_warning",
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1223,
+      "event_date": "2026-10-07",
+      "date_precision": "day",
+      "title": "Gobernador informa cierre de compuertas de Las Pintas",
+      "description": "Quadratín informó que Pablo Lemus dijo que se cerraron las compuertas el día anterior y atribuyó descargas a desbordamientos durante lluvias.",
+      "category": "government_action",
+      "location": "Presa Las Pintas",
+      "significance": "Registra una explicación oficial y un cambio operativo reportado a comienzos de octubre.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Entrevista a Lemus del 7 y reseña posterior de El País reportan el cierre del 6 de octubre.",
+        "notes": "Fecha del evento es la declaración del 7; la operación se reporta el día 6. Dos notas usan declaraciones oficiales; no son mediciones independientes de causa o calidad.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement",
+        "emergency_response"
+      ]
+    },
+    {
+      "id": 1224,
+      "event_date": "2026-10-11",
+      "date_precision": "day",
+      "title": "Marcha ciudadana por agua limpia",
+      "description": "ZonaDocs y El País documentaron una marcha en Guadalajara en la que asistentes exigieron agua limpia.",
+      "category": "protest",
+      "location": "Guadalajara",
+      "significance": "La movilización muestra el alcance público del reclamo, con testimonios independientes.",
+      "verified": 0,
+      "review": {
+        "status": "strong_candidate",
+        "reason": "Dos coberturas periodísticas diferentes describen la marcha del 11 de octubre.",
+        "notes": "Las cifras de detenciones y asistencia difieren y no se incorporan como hechos unificados; requieren revisión por corte y fuente.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "citizen_complaint"
+      ]
+    },
+    {
+      "id": 1225,
+      "event_date": "2026-10-15",
+      "date_precision": "day",
+      "title": "Inicio reportado del esquema de rotación",
+      "description": "El País informó que el esquema de cortes o tandeos se puso en marcha oficialmente el 15 de octubre tras el cierre de Las Pintas.",
+      "category": "government_action",
+      "location": "Área Metropolitana de Guadalajara",
+      "significance": "Vincula una medida de emergencia con cambios en el acceso al servicio.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Reportaje del 22 de octubre sitúa el inicio oficial el 15 de octubre y recoge testimonios.",
+        "notes": "Localizar programa original de SIAPA, cobertura y fecha de entrada en vigor por colonia.",
+        "priority": "media"
+      },
+      "knowledge_metadata": [
+        "emergency_response"
+      ]
+    },
+    {
+      "id": 1226,
+      "event_date": "2026-10-27",
+      "date_precision": "day",
+      "title": "CEA reconoce en prensa problemas en colectores",
+      "description": "Conciencia Pública reportó que el director de CEA reconoció que colectores de esa dependencia vertían aguas residuales y dio cifras de puntos identificados.",
+      "category": "official_statement",
+      "location": "Sistema antiguo Chapala–Guadalajara",
+      "significance": "Añade una explicación oficial sobre infraestructura pública al debate sobre descargas.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Nota atribuye la declaración al director de CEA.",
+        "notes": "Fecha es la publicación; verificar cuándo se hizo la declaración, grabación y diagnóstico original. Evitar inferir culpabilidad.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "official_acknowledgement",
+        "infrastructure_diagnosis"
+      ]
+    },
+    {
+      "id": 1227,
+      "event_date": "2026-10-28",
+      "date_precision": "day",
+      "title": "Federación y Jalisco presentan plan de acueductos",
+      "description": "El País reportó un plan conjunto anunciado por los gobiernos federal y estatal para dos acueductos y obras complementarias.",
+      "category": "government_action",
+      "location": "Guadalajara y Jalisco",
+      "significance": "Registra compromisos anunciados en la fase de respuesta, sin asumir ejecución.",
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Cobertura identifica fecha, actores, montos anunciados y calendario previsto.",
+        "notes": "Obtener conferencia y proyecto oficial; montos y cronograma pueden cambiar y no prueban cumplimiento.",
+        "priority": "alta"
+      },
+      "knowledge_metadata": [
+        "public_commitment"
+      ]
+    }
+  ],
+  "event_sources": [
+    {
+      "event_id": 1201,
+      "source_id": 1101,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1202,
+      "source_id": 1101,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1203,
+      "source_id": 1124,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "source_id": 1101,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "source_id": 1105,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1205,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1206,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1207,
+      "source_id": 1104,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1208,
+      "source_id": 1105,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1208,
+      "source_id": 1101,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1209,
+      "source_id": 1106,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1210,
+      "source_id": 1107,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1212,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1213,
+      "source_id": 1108,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1213,
+      "source_id": 1126,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1214,
+      "source_id": 1109,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1215,
+      "source_id": 1110,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1216,
+      "source_id": 1111,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1216,
+      "source_id": 1112,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1217,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1218,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "source_id": 1102,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1221,
+      "source_id": 1113,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1221,
+      "source_id": 1114,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1223,
+      "source_id": 1116,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1223,
+      "source_id": 1117,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1224,
+      "source_id": 1118,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1224,
+      "source_id": 1119,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1224,
+      "source_id": 1125,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1225,
+      "source_id": 1120,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1226,
+      "source_id": 1121,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "source_id": 1122,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Confirmar que esta fuente respalda la formulación concreta del evento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "event_actors": [
+    {
+      "event_id": 1201,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1201,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1202,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1202,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1203,
+      "actor_id": 1010,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1203,
+      "actor_id": 1020,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "actor_id": 1003,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "actor_id": 1017,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1204,
+      "actor_id": 1019,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1205,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1205,
+      "actor_id": 1007,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1206,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1206,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1206,
+      "actor_id": 1003,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1207,
+      "actor_id": 1013,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1207,
+      "actor_id": 1009,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1207,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1208,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1208,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1209,
+      "actor_id": 1009,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1209,
+      "actor_id": 1013,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1210,
+      "actor_id": 1009,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1210,
+      "actor_id": 1013,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1210,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "actor_id": 1018,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "actor_id": 1003,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1211,
+      "actor_id": 1014,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1212,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1212,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1212,
+      "actor_id": 1014,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1213,
+      "actor_id": 1010,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1213,
+      "actor_id": 1007,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1214,
+      "actor_id": 1008,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1214,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1215,
+      "actor_id": 1010,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1215,
+      "actor_id": 1020,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1216,
+      "actor_id": 1009,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1216,
+      "actor_id": 1013,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1216,
+      "actor_id": 1015,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1217,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1217,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1217,
+      "actor_id": 1006,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1218,
+      "actor_id": 1006,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1218,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1218,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1218,
+      "actor_id": 1014,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1002,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1003,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1006,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1014,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1017,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1220,
+      "actor_id": 1019,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1221,
+      "actor_id": 1009,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1221,
+      "actor_id": 1015,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1223,
+      "actor_id": 1005,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1223,
+      "actor_id": 1004,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1223,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1224,
+      "actor_id": 1015,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1224,
+      "actor_id": 1004,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1225,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1225,
+      "actor_id": 1004,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1226,
+      "actor_id": 1003,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "actor_id": 1004,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "actor_id": 1005,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "actor_id": 1011,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "actor_id": 1012,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "event_id": 1227,
+      "actor_id": 1001,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Relación por revisar.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": 1301,
+      "actor_id": 1001,
+      "event_id": 1202,
+      "claim_date": "2020-08-25",
+      "claim_text": "Personal del SIAPA informó que atendía los reportes de agua turbia y aceptaba medidas cautelares solicitadas por la CEDHJ.",
+      "source_id": 1101,
+      "context": "Oficio recibido por CEDHJ el 25 de agosto de 2020; no acredita cumplimiento.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1302,
+      "actor_id": 1007,
+      "event_id": 1205,
+      "claim_date": "2022-06-20",
+      "claim_text": "La quejosa denunció contaminación y manejo inadecuado en la presa Las Pintas.",
+      "source_id": 1102,
+      "context": "Queja individual de identidad reservada.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1303,
+      "actor_id": 1001,
+      "event_id": 1206,
+      "claim_date": "2023-08-04",
+      "claim_text": "SIAPA informó que realizaba limpieza y desazolve todo el año con apoyo de CEA.",
+      "source_id": 1102,
+      "context": "Oficio reproducido por la CEDHJ, sin auditoría independiente incorporada.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1304,
+      "actor_id": 1002,
+      "event_id": 1208,
+      "claim_date": "2023-09-21",
+      "claim_text": "Según El Informador, el director de seguimiento de CEDHJ dijo que SIAPA aceptó seis de once puntos de la recomendación.",
+      "source_id": 1105,
+      "context": "Fecha de publicación; declaración en agosto de 2023 sin día identificado.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1305,
+      "actor_id": 1013,
+      "event_id": 1210,
+      "claim_date": "2025-03-25",
+      "claim_text": "La campaña denunció problemas de calidad y gestión y reclamó cambios al SIAPA.",
+      "source_id": 1107,
+      "context": "ZonaDocs relata un comunicado de la campaña.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1306,
+      "actor_id": 1018,
+      "event_id": 1211,
+      "claim_date": "2025-09-18",
+      "claim_text": "Los quejosos señalaron presuntas descargas residuales y afectaciones por crecidas en Arroyo Seco.",
+      "source_id": 1102,
+      "context": "Alegato recogido en el expediente 2362/2025/IV.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1307,
+      "actor_id": 1008,
+      "event_id": 1214,
+      "claim_date": "2026-03-13",
+      "claim_text": "Personal entrevistado denunció descargas, falta de mantenimiento y equipo, y dijo haber reportado problemas internamente.",
+      "source_id": 1109,
+      "context": "Testimonio anónimo publicado en ZonaDocs; no se ha localizado respaldo documental de recepción.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1308,
+      "actor_id": 1020,
+      "event_id": 1215,
+      "claim_date": "2026-03-18",
+      "claim_text": "Especialistas propusieron una mesa técnica y alertaron sobre los problemas de calidad del agua.",
+      "source_id": 1110,
+      "context": "Declaraciones públicas recogidas por la universidad.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1309,
+      "actor_id": 1001,
+      "event_id": 1217,
+      "claim_date": "2026-04-15",
+      "claim_text": "SIAPA atribuyó el deterioro del agua cruda a descargas de Tlajomulco y dijo que la potabilizadora no estaba diseñada para procesar ese influente.",
+      "source_id": 1102,
+      "context": "Oficio DJ/099/2026 reproducido por CEDHJ, p. 74.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1310,
+      "actor_id": 1006,
+      "event_id": 1218,
+      "claim_date": "2026-04-15",
+      "claim_text": "Tlajomulco dijo que no constató los diez puntos señalados por SIAPA y describió una línea deteriorada en Toluquilla.",
+      "source_id": 1102,
+      "context": "Oficio municipal reproducido por CEDHJ; no dirime el conflicto con SIAPA.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1311,
+      "actor_id": 1009,
+      "event_id": 1221,
+      "claim_date": "2026-06-29",
+      "claim_text": "IMDEC informó de 184 muestras en 90 colonias y reportó ausencia de cloro residual en 172 de ellas.",
+      "source_id": 1113,
+      "context": "Reporte preliminar de muestreo ciudadano, no prueba representativa de toda la red; corroborar métodos.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1312,
+      "actor_id": 1005,
+      "event_id": 1223,
+      "claim_date": "2026-10-07",
+      "claim_text": "Lemus dijo que las compuertas se cerraron el día anterior y atribuyó descargas a desbordamientos de puntos de resguardo por lluvias.",
+      "source_id": 1116,
+      "context": "Entrevista del 7 de octubre, fecha de reporte de la acción del día 6.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1313,
+      "actor_id": 1003,
+      "event_id": 1226,
+      "claim_date": "2026-10-27",
+      "claim_text": "El director de la CEA reconoció, según el artículo, colectores de la dependencia que vertían aguas residuales.",
+      "source_id": 1121,
+      "context": "Día de publicación; fecha original de declaración pendiente.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1314,
+      "actor_id": 1004,
+      "event_id": 1227,
+      "claim_date": "2026-10-28",
+      "claim_text": "El gobierno estatal anunció junto a la federación un plan con acueductos y obras complementarias.",
+      "source_id": 1122,
+      "context": "Anuncio reportado por El País; el plan podría cambiar.",
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Corroborar atribución, fecha y contexto; no convertir la declaración en hecho.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "responsibilities": [
+    {
+      "id": 1401,
+      "actor_id": 1001,
+      "responsibility": "Operar servicios de agua potable, drenaje, alcantarillado, tratamiento y saneamiento en municipios metropolitanos sujetos a convenios; operar, mantener y administrar fuentes y redes en el ámbito aplicable.",
+      "start_date": null,
+      "end_date": null,
+      "legal_or_institutional_basis": "Ley de creación del SIAPA, versión del Congreso consultada, artículos 1 y 2; validar reformas y convenios aplicables a cada periodo.",
+      "source_id": 1103,
+      "verified": 0,
+      "review": {
+        "status": "primary_source_found",
+        "reason": "Texto legal primario localizado; verificar vigencia y delimitación municipal.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1402,
+      "actor_id": 1011,
+      "responsibility": "Custodiar cuerpos de aguas nacionales, incluidas ciertas presas y canales, conforme a normativa federal.",
+      "start_date": null,
+      "end_date": null,
+      "legal_or_institutional_basis": "Descripción institucional de CONAGUA sobre cuerpos de propiedad nacional; no determina competencia de cada descarga.",
+      "source_id": 1123,
+      "verified": 0,
+      "review": {
+        "status": "needs_additional_source",
+        "reason": "Fuente institucional solo visible en extracto; cotejar Ley de Aguas Nacionales vigente y titularidad del tramo.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ],
+  "commitments": [
+    {
+      "id": 1501,
+      "actor_id": 1005,
+      "event_id": 1223,
+      "commitment_date": "2026-10-07",
+      "commitment": "Anunció que el esquema rotativo no tendría periodos de más de tres días sin agua, según la entrevista.",
+      "deadline": null,
+      "status": "unknown",
+      "source_id": 1116,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Anuncio registrado; obtener evidencia separada sobre ejecución, fecha y cumplimiento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1502,
+      "actor_id": 1012,
+      "event_id": 1227,
+      "commitment_date": "2026-10-28",
+      "commitment": "Se anunció construcción federal de dos acueductos con inicio previsto en los primeros meses de 2027. No se indica una fecha exacta.",
+      "deadline": null,
+      "status": "unknown",
+      "source_id": 1122,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Anuncio registrado; obtener evidencia separada sobre ejecución, fecha y cumplimiento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    },
+    {
+      "id": 1503,
+      "actor_id": 1001,
+      "event_id": 1227,
+      "commitment_date": "2026-10-28",
+      "commitment": "Se anunciaron obras complementarias para renovar y mantener el sistema de distribución.",
+      "deadline": null,
+      "status": "unknown",
+      "source_id": 1122,
+      "verified": 0,
+      "review": {
+        "status": "needs_review",
+        "reason": "Anuncio registrado; obtener evidencia separada sobre ejecución, fecha y cumplimiento.",
+        "notes": "Revisión humana pendiente; no es una aprobación."
+      }
+    }
+  ]
+}
