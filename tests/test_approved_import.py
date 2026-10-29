@@ -6,6 +6,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+from openai import OpenAIError
+
 from agent.agent import ask
 from agent.sql_tools import fallback_plan, retrieve
 from database.db import connect
@@ -240,8 +242,10 @@ class ApprovedImportTest(unittest.TestCase):
         ]
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
             result = ask('¿Qué observó el periodista en El Nixticuil?')
-        self.assertIn('no son suficientes', result['answer'])
-        self.assertEqual(result['sources'], [])
+        self.assertTrue(result['presentation']['fallback'])
+        self.assertEqual([source['id'] for source in result['sources']], [2102])
+        self.assertNotIn('Está comprobado', result['presentation']['attributed_findings'][0]['text'])
+        self.assertEqual(result['diagnostics']['failure_category'], 'presentation_validation_error')
 
     def test_unsupported_political_conclusion_fails_safely(self):
         with patch.dict(os.environ, {'OPENAI_API_KEY': ''}):
@@ -291,8 +295,65 @@ class ApprovedImportTest(unittest.TestCase):
         ]
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
             result = ask('¿Qué observó el periodista en El Nixticuil?')
-        self.assertIn('no son suficientes', result['answer'])
-        self.assertIsNone(result['presentation'])
+        self.assertTrue(result['presentation']['fallback'])
+        self.assertEqual([source['id'] for source in result['sources']], [2102])
+        self.assertEqual(result['diagnostics']['failure_category'], 'presentation_validation_error')
+
+    def test_openai_error_is_labeled_separately_and_keeps_retrieved_evidence(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['nixticuil'], 'before_year': None, 'before_date': None}),
+            OpenAIError('service unavailable'),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertEqual(result['diagnostics']['failure_category'], 'openai_api_error')
+        self.assertIn('configuración de OpenAI', result['notice'])
+        self.assertTrue(result['presentation']['fallback'])
+        self.assertEqual([source['id'] for source in result['sources']], [2102])
+
+    def test_missing_api_key_keeps_evidence_visible_with_configuration_notice(self):
+        with patch.dict(os.environ, {'OPENAI_API_KEY': ''}):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertTrue(result['presentation']['fallback'])
+        self.assertIn(2102, {source['id'] for source in result['sources']})
+        self.assertIn('Configura OPENAI_API_KEY', result['notice'])
+        self.assertEqual(result['diagnostics']['failure_category'], 'openai_api_error')
+
+    def test_structured_response_is_repaired_once_after_partial_validation_failure(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['nixticuil'], 'before_year': None, 'before_date': None}),
+            response({
+                'summary': 'Una observación periodística requiere atribución.',
+                'verified_findings': [],
+                'attributed_findings': [
+                    {'date': '2026-04-13', 'title': 'Válido', 'author': 'Pepe Toral', 'text': 'Toral observó una descarga.', 'source_ids': [2102], 'limitation': ''},
+                    {'date': '2026-04-13', 'title': 'No válido', 'author': 'Desconocido', 'text': 'Alegación sin fuente.', 'source_ids': [9999]},
+                ],
+                'limitations': [''],
+                'source_ids': [2102, 2102],
+            }),
+            response({
+                'summary': 'El reportaje conserva una observación atribuida.',
+                'verified_findings': [],
+                'attributed_findings': [{
+                    'date': '2026-04-13', 'title': 'Recorrido periodístico', 'author': 'Pepe Toral',
+                    'text': 'Toral observó una descarga y reportó testimonios de residentes.', 'source_ids': [2102],
+                }],
+                'limitations': [],
+            }),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertEqual(client.chat.completions.create.call_count, 3)
+        self.assertFalse(result['presentation'].get('fallback'))
+        self.assertEqual([source['id'] for source in result['sources']], [2102])
+        self.assertEqual(result['presentation']['source_ids'], [2102])
 
 
 if __name__ == '__main__':
