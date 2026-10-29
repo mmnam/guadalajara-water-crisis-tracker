@@ -3,6 +3,7 @@ import os
 import re
 from openai import OpenAI, OpenAIError
 from agent.prompts import PLANNER, ANSWER
+from agent.presentation import validate_presentation
 from agent.sql_tools import fallback_plan, retrieve
 
 
@@ -19,7 +20,7 @@ def has_explicit_political_context(evidence):
 def ask(question):
     spanish = bool(re.search(r'[¿¡áéíóúñ]|\b(qué|quién|cuando|antes|muestra|compara|sabía|agua|responsable|prometió)\b', question.lower()))
     insufficient = ('Los registros disponibles en la base de datos no son suficientes para responder de forma confiable.' if spanish else 'The available records in the database are not sufficient to answer this reliably.')
-    result = {'answer': '', 'sources': [], 'traces': [], 'evidence': {}, 'notice': ''}
+    result = {'answer': '', 'sources': [], 'traces': [], 'evidence': {}, 'notice': '', 'presentation': None}
     client = OpenAI(timeout=25, max_retries=1) if os.getenv('OPENAI_API_KEY') else None
     plan = fallback_plan(question)
     model = os.getenv('OPENAI_MODEL', 'gpt-4.1-mini')
@@ -60,9 +61,15 @@ def ask(question):
         }
         response = client.chat.completions.create(model=model, messages=[{'role':'system','content':ANSWER},{'role':'system','content':citation_contract},{'role':'user','content':json.dumps({'question':question,'evidence':model_evidence},ensure_ascii=False)}], response_format={'type':'json_object'}, temperature=0)
         output = json.loads(response.choices[0].message.content)
+        available = {s['id']:s for s in evidence['sources']}
+        if 'summary' in output:
+            presentation = validate_presentation(output, available)
+            result['answer'] = presentation['summary']
+            result['presentation'] = presentation
+            result['sources'] = [available[source_id] for source_id in sorted(set(output['source_ids']))]
+            return result
         answer = output['answer']
         ids = output['source_ids']
-        available = {s['id']:s for s in evidence['sources']}
         cited = {int(n) for n in re.findall(r'\[S(\d+)\]', answer)}
         valid_id_list = isinstance(ids, list) and all(type(i) is int for i in ids)
         # A JSON response can name valid sources yet omit inline markers. Attach

@@ -5,6 +5,7 @@ import streamlit as st
 from database.db import initialize
 from services import records
 from agent.agent import ask
+from agent.presentation import source_label
 
 st.set_page_config(page_title='Memoria Hídrica GDL', page_icon='💧', layout='wide')
 initialize()
@@ -33,18 +34,57 @@ def source_link(source):
         st.caption(f'{label} · Sin enlace verificable; no sirve como evidencia histórica.')
 
 
+def citation_labels(source_ids):
+    return ' · '.join(f'[S{source_id}]' for source_id in source_ids)
+
+
+def render_finding(finding, label):
+    with st.container(border=True):
+        st.caption(label)
+        st.markdown(f"**{finding['date']}**")
+        st.markdown(f"#### {finding['title']}")
+        if finding.get('author'):
+            st.write(f"**Autor / fuente:** {finding['author']}")
+        st.write(finding['text'])
+        st.caption('Citas: ' + citation_labels(finding['source_ids']))
+        if finding.get('limitation'):
+            st.markdown('**Límite**')
+            st.write(finding['limitation'])
+
+
 def render_result(result):
-    # Plain text keeps model-created markdown/links from becoming citation links.
-    st.text(result['answer'])
+    presentation = result.get('presentation')
+    if presentation:
+        if presentation['verified_findings']:
+            st.markdown('## Lo documentado oficialmente')
+            for finding in presentation['verified_findings']:
+                render_finding(finding, 'Fuente verificada')
+        if presentation['attributed_findings']:
+            st.markdown('## Lo reportado o analizado')
+            for finding in presentation['attributed_findings']:
+                render_finding(finding, 'Reporte / análisis atribuido')
+        if presentation['limitations']:
+            st.markdown('## Lo que todavía no puede establecerse')
+            for limitation in presentation['limitations']:
+                st.markdown('- ' + limitation)
+        st.markdown('## Conclusión')
+        st.write(presentation['summary'])
+    elif not result['sources'] and 'no son suficientes' in result['answer'].lower():
+        st.error('Evidencia insuficiente')
+        st.write('El corpus actual no contiene información suficiente para responder esta pregunta de forma confiable.')
+    else:
+        # Legacy safe fallback for older model output.
+        st.write(result['answer'])
     if result['notice']:
         st.info(result['notice'])
-    st.markdown('**Fuentes utilizadas**')
+    st.markdown('## Fuentes utilizadas')
     if not result['sources']:
         st.caption('No hay fuentes citadas en esta respuesta.')
     for s in result['sources']:
-        status = 'Reporte / análisis atribuido' if s.get('evidence_tier') == 'attributed_reviewed' else 'Fuente verificada'
-        st.caption(f"[S{s['id']}] · {status} · {s['publisher']} · {s['publication_date']}")
-        source_link(s)
+        with st.container(border=True):
+            st.markdown(f"**[S{s['id']}] · {source_label(s)}**")
+            st.caption(f"{s['publisher']} · {s['publication_date']} · {s['source_type']}")
+            source_link(s)
     with st.expander('Ver consultas SQL · SELECT / solo lectura'):
         for trace in result['traces']:
             st.code(trace['sql'], language='sql')
