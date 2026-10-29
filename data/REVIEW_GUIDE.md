@@ -1,6 +1,6 @@
 # Guía de revisión · Memoria Hídrica GDL
 
-**Corte de investigación: 28 de octubre de 2026.** Todos los registros son candidatos `verified=0`; ninguna evidencia se ha importado ni aprobado. La fecha de una recomendación posterior no es la fecha de los expedientes anteriores que reproduce.
+**Corte de investigación: 28 de octubre de 2026.** `candidate_records.json` sigue siendo una capa de candidatos: todos sus registros permanecen `verified=0`. La primera importación controlada aprobó únicamente E1201, E1202, E1204, E1205, E1206, E1211, E1222, E1212, E1219, E1217, E1218 y E1220 en la representación separada [`approved_records.json`](approved_records.json); su alcance y límites están en [`APPROVED_RECORDS.md`](APPROVED_RECORDS.md). La fecha de una recomendación posterior no es la fecha de los expedientes anteriores que reproduce.
 
 ## Cómo revisar y aprobar
 
