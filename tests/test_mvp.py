@@ -81,9 +81,10 @@ class MVPTest(unittest.TestCase):
                 response({'answer':f'Documented statement [S{source_id}]', 'source_ids':[source_id]})]
             with patch.dict(os.environ, {'OPENAI_API_KEY':'test-key'}), patch('agent.agent.OpenAI', return_value=client):
                 result=ask('What happened?')
-            self.assertEqual(bool(result['sources']),valid)
+            self.assertTrue(result['sources'])
             if not valid:
-                self.assertIn('not sufficient',result['answer'])
+                self.assertTrue(result['presentation']['fallback'])
+                self.assertNotIn(999, {source['id'] for source in result['sources']})
 
     def test_streamlit_pages(self):
         from streamlit.testing.v1 import AppTest

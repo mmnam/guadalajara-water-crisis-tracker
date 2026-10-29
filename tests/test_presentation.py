@@ -37,10 +37,39 @@ class PresentationTest(unittest.TestCase):
         self.assertEqual(result['attributed_findings'][0]['source_ids'], [2101])
 
     def test_limitations_and_duplicate_citations_are_cleaned(self):
-        result = validate_presentation(payload(), SOURCES)
+        candidate = payload()
+        candidate['source_ids'] = [2101, 1102, 2101]
+        candidate['attributed_findings'][0]['limitation'] = ''
+        result = validate_presentation(candidate, SOURCES)
         self.assertEqual(result['limitations'], ['No se establece causalidad.'])
         self.assertNotIn('[S1102]', result['verified_findings'][0]['text'])
         self.assertNotIn('[S2101]', result['attributed_findings'][0]['text'])
+        self.assertEqual(result['source_ids'], [1102, 2101])
+
+    def test_invalid_finding_is_omitted_without_discarding_valid_findings(self):
+        candidate = payload(verified=True, attributed=True)
+        candidate['attributed_findings'][0]['source_ids'] = [9999]
+        candidate['source_ids'] = [1102, 9999]
+        result = validate_presentation(candidate, SOURCES)
+        self.assertEqual([row['source_ids'] for row in result['verified_findings']], [[1102]])
+        self.assertEqual(result['attributed_findings'], [])
+        self.assertEqual(result['source_ids'], [1102])
+        self.assertTrue(result['validation_errors'])
+        self.assertIn('omitieron', result['limitations'][-1])
+
+    def test_evidence_status_overrides_storage_tier_for_documented_material(self):
+        sources = {**SOURCES, 3001: {
+            'id': 3001, 'title': 'Documento revisado', 'evidence_tier': 'reviewed_usable',
+            'evidence_status': 'verified_document', 'url': 'https://example.org/documento',
+        }}
+        candidate = payload(verified=False, attributed=False)
+        candidate['verified_findings'] = [{
+            'date': '2026-01-01', 'title': 'Documento', 'text': 'El documento registra una actuación.',
+            'source_ids': [3001],
+        }]
+        candidate['source_ids'] = [3001]
+        result = validate_presentation(candidate, sources)
+        self.assertEqual(result['verified_findings'][0]['source_ids'], [3001])
 
     def test_wrong_tier_or_malformed_presentation_is_rejected(self):
         wrong_tier = payload(verified=True, attributed=False)
@@ -86,6 +115,29 @@ class PresentationTest(unittest.TestCase):
         }]
         app.sidebar.radio[0].set_value('Pregúntale al archivo').run()
         self.assertEqual(app.error[0].value, 'Evidencia insuficiente')
+
+    def test_streamlit_failure_shows_safe_technical_diagnostics(self):
+        from streamlit.testing.v1 import AppTest
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=20).run()
+        app.session_state['messages'] = [{
+            'question': 'demo',
+            'result': {
+                'answer': 'No fue posible generar la síntesis automática, pero la evidencia recuperada sí está disponible.',
+                'notice': 'No se pudo completar la llamada al modelo. Revisa la configuración de OpenAI o los registros del despliegue.',
+                'sources': [SOURCES[1102]], 'traces': [], 'evidence': {},
+                'presentation': {
+                    'summary': 'No fue posible generar la síntesis automática, pero la evidencia recuperada sí está disponible.',
+                    'verified_findings': [{'date': '2025-09-19', 'title': 'Documento', 'text': 'Registro recuperado.', 'source_ids': [1102], 'limitation': ''}],
+                    'attributed_findings': [], 'limitations': [], 'source_ids': [1102], 'fallback': True,
+                },
+                'diagnostics': {
+                    'failure_category': 'openai_api_error', 'model': 'gpt-4.1-mini',
+                    'evidence_rows': {'verified_events': 1}, 'allowed_source_ids': [1102],
+                },
+            },
+        }]
+        app.sidebar.radio[0].set_value('Pregúntale al archivo').run()
+        self.assertIn('Diagnóstico técnico', [item.label for item in app.expander])
 
 
 if __name__ == '__main__':

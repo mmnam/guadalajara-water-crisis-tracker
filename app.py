@@ -1,14 +1,35 @@
 import html
+import logging
+import os
 from urllib.parse import urlparse
 import pandas as pd
 import streamlit as st
+from database.db import connect
 from database.seed import bootstrap
 from services import records
 from agent.agent import ask
 from agent.presentation import source_label
 
 st.set_page_config(page_title='Memoria Hídrica GDL', page_icon='💧', layout='wide')
+logger = logging.getLogger(__name__)
 bootstrap()
+try:
+    with connect(read_only=True) as conn:
+        startup_counts = {
+            'verified_events': conn.execute('SELECT count(*) FROM events WHERE verified=1').fetchone()[0],
+            'attributed_material': conn.execute('SELECT count(*) FROM attributed_material').fetchone()[0],
+            'reviewed_usable_material': conn.execute('SELECT count(*) FROM usable_evidence').fetchone()[0],
+        }
+    logger.info(
+        'OPENAI_API_KEY configured: %s; OPENAI_MODEL: %s; verified events: %s; attributed material: %s; reviewed usable material: %s',
+        'yes' if os.getenv('OPENAI_API_KEY') else 'no',
+        os.getenv('OPENAI_MODEL', 'gpt-4.1-mini'),
+        startup_counts['verified_events'],
+        startup_counts['attributed_material'],
+        startup_counts['reviewed_usable_material'],
+    )
+except Exception:
+    logger.exception('Database bootstrap verification failed')
 st.markdown('''<style>
 .stApp {background:#f6f3ee;color:#263840}
 .block-container {max-width:1180px;padding:1.25rem 1.25rem 3.5rem}
@@ -121,7 +142,7 @@ def status_badge_kind(status):
     return 'attributed'
 
 
-def render_finding(finding, label, kind):
+def render_finding(finding, label, kind, source=None):
     with st.container(border=True):
         st.markdown('<div class="finding-label">', unsafe_allow_html=True)
         evidence_badge(label, kind)
@@ -132,6 +153,8 @@ def render_finding(finding, label, kind):
             st.write(f"**Autor / fuente:** {finding['author']}")
         st.write(finding['text'])
         st.caption('Citas: ' + citation_labels(finding['source_ids']))
+        if source:
+            source_link(source)
         if finding.get('limitation'):
             st.markdown(f'<div class="uncertainty-box"><strong>Límite de evidencia.</strong> {html.escape(finding["limitation"])}</div>', unsafe_allow_html=True)
 
@@ -139,21 +162,29 @@ def render_finding(finding, label, kind):
 def render_result(result):
     presentation = result.get('presentation')
     if presentation:
-        st.markdown('<div class="answer-lede"><strong>Lectura guiada del archivo.</strong> La respuesta conserva separadas la documentación institucional y el material atribuido revisado; las citas permiten volver a cada fuente.</div>', unsafe_allow_html=True)
+        source_by_id = {source['id']: source for source in result['sources']}
+        if presentation.get('fallback'):
+            st.markdown('## Evidencia recuperada')
+            st.info('No fue posible generar la síntesis automática, pero la evidencia recuperada sí está disponible.')
+        else:
+            st.markdown('<div class="answer-lede"><strong>Lectura guiada del archivo.</strong> La respuesta conserva separadas la documentación institucional y el material atribuido revisado; las citas permiten volver a cada fuente.</div>', unsafe_allow_html=True)
         if presentation['verified_findings']:
-            st.markdown('## Lo documentado oficialmente')
+            st.markdown('### Lo documentado oficialmente' if presentation.get('fallback') else '## Lo documentado oficialmente')
             for finding in presentation['verified_findings']:
-                render_finding(finding, 'Fuente verificada', 'verified')
+                source = source_by_id.get(finding['source_ids'][0])
+                render_finding(finding, source_label(source) if source else 'Fuente verificada', 'verified', source)
         if presentation['attributed_findings']:
-            st.markdown('## Lo reportado o analizado')
+            st.markdown('### Lo reportado o analizado' if presentation.get('fallback') else '## Lo reportado o analizado')
             for finding in presentation['attributed_findings']:
-                render_finding(finding, 'Reporte / análisis atribuido', 'attributed')
+                source = source_by_id.get(finding['source_ids'][0])
+                render_finding(finding, source_label(source) if source else 'Reporte / análisis atribuido', 'attributed', source)
         if presentation['limitations']:
-            st.markdown('## Lo que todavía no puede establecerse')
+            st.markdown('### Lo que todavía no puede establecerse' if presentation.get('fallback') else '## Lo que todavía no puede establecerse')
             for limitation in presentation['limitations']:
                 st.markdown(f'<div class="uncertainty-box">{html.escape(limitation)}</div>', unsafe_allow_html=True)
-        st.markdown('## Conclusión')
-        st.write(presentation['summary'])
+        if not presentation.get('fallback'):
+            st.markdown('## Conclusión')
+            st.write(presentation['summary'])
     elif not result['sources'] and 'no son suficientes' in result['answer'].lower():
         st.error('Evidencia insuficiente')
         st.write('El corpus actual no contiene información suficiente para responder esta pregunta de forma confiable.')
@@ -173,6 +204,15 @@ def render_result(result):
             source_link(s)
             if s.get('reliability_notes'):
                 st.caption(s['reliability_notes'])
+    diagnostics = result.get('diagnostics', {})
+    if diagnostics.get('failure_category'):
+        with st.expander('Diagnóstico técnico'):
+            st.write({
+                'categoría de fallo': diagnostics['failure_category'],
+                'modelo': diagnostics.get('model'),
+                'filas de evidencia recuperadas': diagnostics.get('evidence_rows', {}),
+                'IDs de fuente permitidos': diagnostics.get('allowed_source_ids', []),
+            })
     with st.expander('Ver consultas SQL · SELECT / solo lectura'):
         for trace in result['traces']:
             st.code(trace['sql'], language='sql')
