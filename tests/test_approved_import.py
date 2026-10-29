@@ -194,6 +194,42 @@ class ApprovedImportTest(unittest.TestCase):
         evidence, _ = retrieve(fallback_plan('¿Qué señaló Josué Sánchez sobre Arroyo Seco el 17 de septiembre de 2025?'))
         self.assertIn(2101, {row['id'] for row in evidence['attributed_evidence']})
 
+    def test_structured_model_output_drives_presentation_and_source_cards(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['nixticuil'], 'before_year': None, 'before_date': None}),
+            response({
+                'summary': 'El reportaje conserva una observación atribuida, no una conclusión técnica.',
+                'verified_findings': [],
+                'attributed_findings': [{
+                    'date': '2026-04-13', 'title': 'Recorrido periodístico', 'author': 'Pepe Toral',
+                    'text': 'Toral observó aguas negras y recogió testimonios de residentes.',
+                    'source_ids': [2102], 'limitation': 'No hay análisis de laboratorio recuperado.',
+                }],
+                'limitations': ['No se establece el origen de la descarga.'],
+                'source_ids': [2102],
+            }),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertEqual(result['sources'][0]['evidence_tier'], 'attributed_reviewed')
+        self.assertEqual(result['presentation']['attributed_findings'][0]['source_ids'], [2102])
+
+    def test_malformed_structured_model_output_falls_back_safely(self):
+        def response(payload):
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payload)))])
+        client = MagicMock()
+        client.chat.completions.create.side_effect = [
+            response({'terms': ['nixticuil'], 'before_year': None, 'before_date': None}),
+            response({'summary': 'Incompleto', 'verified_findings': [], 'attributed_findings': [], 'limitations': []}),
+        ]
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}), patch('agent.agent.OpenAI', return_value=client):
+            result = ask('¿Qué observó el periodista en El Nixticuil?')
+        self.assertIn('no son suficientes', result['answer'])
+        self.assertIsNone(result['presentation'])
+
 
 if __name__ == '__main__':
     unittest.main()
